@@ -18,3 +18,9 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('login', 'AuthController@postLogin');
     Route::get('logout', 'AuthController@getLogout');
 });
+
+Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'as' => 'admin::'], function () {
+//    Route::group(['middleware' => ['access']], function () {
+        Route::get('/', 'HomeController@index');
+//    });
+});

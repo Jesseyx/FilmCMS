@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'name' => '超级管理员',
             'email' => 'jingshuaijun@kankan.com',
             'password' => bcrypt('root'),
-            'avatar' => '/user2-160x160.jpg',
+            'avatar' => '/img/user2-160x160.jpg',
             'cellphone' => '13115036044',
         ]);
     }
