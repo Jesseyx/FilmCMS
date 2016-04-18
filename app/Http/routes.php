@@ -21,6 +21,11 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'as' => 'admin::'], function () {
 //    Route::group(['middleware' => ['access']], function () {
-        Route::get('/', 'HomeController@index');
+        Route::get('/index', 'HomeController@index');
 //    });
+
+    Route::group(['prefix' => 'movie'], function () {
+        // 影视库
+        Route::resource('library', 'MovieLibraryController');
+    });
 });
