@@ -28,4 +28,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'as' => 'admin::
         // 影视库
         Route::resource('library', 'MovieLibraryController');
     });
+
+
+    // 用户权限管理
+    Route::resource('/user', 'UserController');
 });
