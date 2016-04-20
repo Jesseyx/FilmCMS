@@ -32,4 +32,11 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'as' => 'admin::
 
     // 用户权限管理
     Route::resource('/user', 'UserController');
+
+
+    // API
+    Route::group(['prefix' => 'api', 'namespace' => 'Api', 'as' => 'api::'], function () {
+        // user
+        Route::resource('user', 'UserController', ['only' => ['index']]);
+    });
 });
