@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+/* just use web group by default, 已经默认被 web 中间件处理了，如果再引入一次的话，验证不生效，不知道什么原因 */
+
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
+    Route::get('login', 'AuthController@getLogin');
+    Route::post('login', 'AuthController@postLogin');
+    Route::get('logout', 'AuthController@getLogout');
+});
+
+Route::group(['middleware' => 'auth', 'namespace' => 'Home', 'as' => 'home::'], function () {
+   Route::get('/', 'HomeController@index');
 });

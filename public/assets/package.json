@@ -1,0 +1,15 @@
+{
+  "name": "myadmin-assets",
+  "version": "1.0.0",
+  "description": "myadmin, assets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jesseyx",
+  "license": "ISC",
+  "devDependencies": {
+    "admin-lte": "^2.3.3",
+    "bootstrap": "^3.3.6"
+  }
+}
