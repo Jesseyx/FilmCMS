@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,10 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // 给视图注册 $user 变量
-        view()->composer('*', function($view) {
-            $view->with('user', Auth::user());
-        });
+        //
     }
 
     /**
