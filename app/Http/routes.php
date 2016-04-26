@@ -19,6 +19,12 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('logout', 'AuthController@getLogout');
 });
 
-Route::group(['middleware' => 'auth', 'namespace' => 'Home', 'as' => 'home::'], function () {
-   Route::get('/', 'HomeController@index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['namespace' => 'Home', 'as' => 'home::'], function () {
+        Route::get('/', 'HomeController@index');
+    });
+
+    Route::group(['namespace' => 'User', 'as' => 'user::', 'prefix' => 'user'], function () {
+        Route::get('/profile', 'UserController@getProfile');
+    });
 });

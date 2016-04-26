@@ -46,8 +46,8 @@ return [
         'text' => '用户中心',
         'icon' => 'fa-user',
         'children' => [
-            'profile' => ['text' => '基本信息', 'href' => '#'],
-            'password' => ['text' => '修改密码', 'href' => '#'],
+            'profile' => ['text' => '基本信息', 'href' => '/user/profile'],
+            'password' => ['text' => '修改密码', 'href' => '/user/reset'],
         ]
     ],
     'userAuth' => [
