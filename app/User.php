@@ -40,4 +40,23 @@ class User extends Authenticatable
         // $user->roles 访问
         return $this->belongsToMany('App\Role', 'role_user');
     }
+
+    public function permissions()
+    {
+        // enable 是作用域
+        // with "文档-关联关系" 渴求式加载，减少查询次数
+        $roles = $this->roles()->enable()->with(['permissions' => function ($query) {
+            $query->enable();
+        }])->get();
+
+        // collect 函数会根据提供的数据项创建一个集合
+        $permissions = collect();
+
+        foreach ($roles as $role) {
+            $permissions = $permissions->merge($role->permissions);
+        }
+
+        // 集合 unique 返回唯一数据项
+        return $permissions->unique('id')->all();
+    }
 }

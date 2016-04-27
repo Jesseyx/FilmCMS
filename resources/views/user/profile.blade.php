@@ -72,6 +72,15 @@
                     <p>
                         @if(in_array($user->username, config('admin.backend.authority.supers')))
                             <small class="label bg-yellow"> 所有权限</small>
+                        @else
+                            @foreach(config('admin.backend.authority.ignores') as $ignore)
+                                <small class="label bg-yellow">{{ $ignore['name'] }}</small>
+                                {{ ' ' }}
+                            @endforeach
+                            @foreach($user->permissions() as $permission)
+                                <small class="label bg-yellow">{{ $permission->name }}</small>
+                                {{ ' ' }}
+                            @endforeach
                         @endif
                     </p>
                 </div>
