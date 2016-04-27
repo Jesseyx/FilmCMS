@@ -87,6 +87,6 @@ class UserController extends Controller
 
     public function getProfile()
     {
-        return 'adasdasd';
+        return view('user.profile');
     }
 }

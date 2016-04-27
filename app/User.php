@@ -33,4 +33,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function roles()
+    {
+        // 多对多关系
+        // $user->roles 访问
+        return $this->belongsToMany('App\Role', 'role_user');
+    }
 }
