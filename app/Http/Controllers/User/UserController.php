@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->user = Auth::user();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -88,5 +94,24 @@ class UserController extends Controller
     public function getProfile()
     {
         return view('user.profile');
+    }
+
+    public function getEdit()
+    {
+        return view('user.self_edit');
+    }
+
+    public function postEdit(Requests\UserEditRequest $request)
+    {
+        $inputs = $request->only(['cellphone', 'email']);
+        $inputs['cellphone'] && $this->user->cellphone = $inputs['cellphone'];
+        $inputs['email'] && $this->user->email = $inputs['email'];
+
+        if ($this->user->save()) {
+            return redirect('/user/profile');
+        }
+
+        // 将输入存储到一次性 Session 然后重定向, "基础--HTTP 请求"
+        return back()->withInput();
     }
 }

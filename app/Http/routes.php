@@ -25,6 +25,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['namespace' => 'User', 'as' => 'user::', 'prefix' => 'user'], function () {
-        Route::get('/profile', 'UserController@getProfile');
+        Route::get('profile', 'UserController@getProfile');
+        Route::get('edit', 'UserController@getEdit');
+        Route::post('edit', 'UserController@postEdit');
+    });
+
+    Route::group(['namespace' => 'Password'], function () {
+        Route::controller('password', 'PasswordController');
     });
 });

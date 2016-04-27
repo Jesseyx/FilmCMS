@@ -47,7 +47,7 @@ return [
         'icon' => 'fa-user',
         'children' => [
             'profile' => ['text' => '基本信息', 'href' => '/user/profile'],
-            'password' => ['text' => '修改密码', 'href' => '/user/reset'],
+            'password' => ['text' => '修改密码', 'href' => '/password/reset'],
         ]
     ],
     'userAuth' => [
