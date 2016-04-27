@@ -10,9 +10,10 @@ class Role extends Model
     const STATUS_DISABLE = -1;
     const STATUS_ENABLE = 1;
 
-    public function users()
+    // 权限，多对多关系
+    public function permissions()
     {
-        return $this->belongsToMany('App\User', 'role_user');
+        return $this->belongsToMany('App\Permission', 'permission_role');
     }
 
     // 本地作用域允许我们定义通用的约束集合以便在应用中复用

@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('123456'),
                 'avatar' => '/img/user2-160x160.jpg',
                 'cellphone' => '13115036044',
-            ]
+            ],
         ]);
     }
 }
