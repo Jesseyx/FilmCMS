@@ -1,0 +1,42 @@
+/* table-content */
+.table-content {
+  .form-group {
+    margin-top: 10px;
+    margin-left: 15px;
+  }
+  th {
+    > .btn {
+      padding: 0 3px;
+      margin-top: -3px;
+      margin-left: 10px;
+    }
+
+    > i {
+      margin-right: 5px;
+    }
+  }
+  .table > thead > tr > th, table > tbody > tr > td {
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .table > tbody > tr > td {
+    vertical-align: middle;
+  }
+  .table > tbody {
+    .btn {
+      display: block;
+      width: 80px;
+      margin: 0 auto;
+    }
+  }
+  .summary {
+    margin: 0;
+    text-align: right;
+  }
+  .pagination {
+    margin: 10px 0 0;
+  }
+}

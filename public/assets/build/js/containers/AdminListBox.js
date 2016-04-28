@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import SearchBox from '../components/SearchBox';
+import TableBox from '../components/TableBox';
+import Pagination from '../components/Pagination';
 
 const propTypes = {
 
@@ -8,7 +10,7 @@ const propTypes = {
 class AdminListBox extends Component {
     render() {
         return (
-            <div className="table-responsive">
+            <div className="table-responsive table-content">
                 <SearchBox>
                     <form className="form-inline">
                         <div className="form-group">
@@ -39,6 +41,15 @@ class AdminListBox extends Component {
                         </div>
                     </form>
                 </SearchBox>
+
+                <TableBox>
+
+                </TableBox>
+
+
+                <Pagination>
+                    
+                </Pagination>
             </div>
         )
     }

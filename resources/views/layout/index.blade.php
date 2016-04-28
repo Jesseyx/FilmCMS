@@ -17,6 +17,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href={{ cssAsset('node_modules/admin-lte/dist/css/skins/skin-blue.min.css') }}>
+    <!-- Self style -->
+    <link rel="stylesheet" href={{ cssAsset('dist/css/main.css') }}>
 
     @yield('header')
 

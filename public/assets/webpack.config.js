@@ -9,7 +9,7 @@ module.exports = {
         user_index: ['./user/index'],
     },
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'dist', 'js'),
         filename: '[name].bundle.js',
     },
     module: {
