@@ -32,5 +32,9 @@ class UsersTableSeeder extends Seeder
                 'cellphone' => '13115036044',
             ],
         ]);
+
+        factory('App\User', 50)->create()->each(function ($u) {
+            $u->save();
+        });
     }
 }

@@ -41,3 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::controller('password', 'PasswordController');
     });
 });
+
+Route::group(['namespace' => 'Api', 'as' => 'api::', 'prefix' => 'api'], function () {
+    Route::get('user', 'UserController@index');
+});
