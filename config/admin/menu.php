@@ -54,14 +54,14 @@ return [
         'text' => '用户权限管理',
         'icon' => 'fa-users',
         'children' => [
-            'userList' => ['text' => '用户列表', 'href' => '#'],
-            'addUser' => ['text' => '添加用户', 'href' => '#'],
-            'roleList' => ['text' => '角色列表', 'href' => '#'],
-            'addRole' => ['text' => '添加角色', 'href' => '#'],
-            'authList' => ['text' => '权限列表', 'href' => '#'],
-            'addAuth' => ['text' => '添加权限', 'href' => '#'],
-            'groupList' => ['text' => '权限分组列表', 'href' => '#'],
-            'addGroup' => ['text' => '添加权限分组', 'href' => '#'],
+            'userList' => ['text' => '用户列表', 'href' => '/user'],
+            'addUser' => ['text' => '添加用户', 'href' => '/user/create'],
+            'roleList' => ['text' => '角色列表', 'href' => '/role'],
+            'addRole' => ['text' => '添加角色', 'href' => '/role/create'],
+            'authList' => ['text' => '权限列表', 'href' => '/permission'],
+            'addAuth' => ['text' => '添加权限', 'href' => '/permission/create'],
+            'groupList' => ['text' => '权限分组列表', 'href' => '/permission-group'],
+            'addGroup' => ['text' => '添加权限分组', 'href' => '/permission-group/create'],
 
         ]
     ],

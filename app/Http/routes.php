@@ -24,12 +24,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'HomeController@index');
     });
 
-    Route::group(['namespace' => 'User', 'as' => 'user::', 'prefix' => 'user'], function () {
-        Route::get('profile', 'UserController@getProfile');
-        Route::get('edit', 'UserController@getEdit');
-        Route::post('edit', 'UserController@postEdit');
+    // user
+    Route::group(['namespace' => 'User', 'as' => 'user::'], function () {
+        Route::group(['prefix' => 'user'], function () {
+            Route::get('profile', 'UserController@getProfile');
+            Route::get('edit', 'UserController@getEdit');
+            Route::post('edit', 'UserController@postEdit');
+        });
+
+        Route::resource('user', 'UserController');
     });
 
+
+    // password
     Route::group(['namespace' => 'Password'], function () {
         Route::controller('password', 'PasswordController');
     });
