@@ -1,20 +1,23 @@
 import React, { Component, PropTypes } from 'react';
-import SearchBox from '../components/SearchBox';
-import TableBox from '../components/TableBox';
-import Pagination from '../components/Pagination';
+import SearchBox from './SearchBox';
+import TableBox from './TableBox';
+import Pagination from './Pagination';
 
 const propTypes = {
-
+    className: PropTypes.string,
+    dataUrl: PropTypes.string.isRequired
 }
 
 class AdminListBox extends Component {
     render() {
+        const { className, dataUrl } = this.props;
+
         return (
-            <div className="table-responsive table-content">
+            <div className={ className + ' table-content' }>
                 <SearchBox>
                     <form className="form-inline">
                         <div className="form-group">
-                            <label for="status">状态：</label>
+                            <label htmlFor="status">状态：</label>
                             <select id="status" className="form-control" name="status">
                                 <option value="">全部</option>
                                 <option value="1">已启用</option>
@@ -22,15 +25,15 @@ class AdminListBox extends Component {
                             </select>
                         </div>
                         <div className="form-group">
-                            <label for="userId">用户id：</label>
+                            <label htmlFor="userId">用户id：</label>
                             <input id="userId" className="form-control" type="text" name="id" placeholder="用户id：" />
                         </div>
                         <div className="form-group">
-                            <label for="username">用户名：</label>
+                            <label htmlFor="username">用户名：</label>
                             <input id="username" className="form-control" type="text" name="username" placeholder="用户名：" />
                         </div>
                         <div className="form-group">
-                            <label for="name">姓名：</label>
+                            <label htmlFor="name">姓名：</label>
                             <input id="name" className="form-control" type="text" name="name" placeholder="姓名：" />
                         </div>
                         <div className="form-group" style={{ marginLeft: '15px' }}>
@@ -42,13 +45,13 @@ class AdminListBox extends Component {
                     </form>
                 </SearchBox>
 
-                <TableBox>
-
+                <TableBox dataUrl={ dataUrl }>
+                    
                 </TableBox>
 
 
                 <Pagination>
-                    
+
                 </Pagination>
             </div>
         )
