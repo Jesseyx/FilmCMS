@@ -5,20 +5,14 @@ import SortTh from '../components/SortTh';
 import UserRow from '../containers/UserRow';
 
 const propTypes = {
-    dataUrl: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
 }
 
 class TableBox extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            loading: true,
-        }
-    }
 
     renderLoading() {
-        const { loading } = this.state;
+        const { loading } = this.props;
 
         return (
             <div className="overlay" style={{ display: loading ? 'block' : 'none'  }}>
@@ -27,28 +21,10 @@ class TableBox extends Component {
         )
     }
 
-    componentWillMount() {
-        this.loadData();
-    }
-
-    loadData() {
-        const { dataUrl } = this.props;
-        $.getJSON(dataUrl, function (json) {
-            const results = json.data;
-            this.setState({
-                loading: false,
-                total: results.total,
-                per_page: results.per_page,
-                data: results.data,
-                lins: results.links,
-            })
-        }.bind(this));
-    }
-
     renderRows() {
-        const { data } = this.state;
+        const { data } = this.props;
         console.log(data);
-        if (!data) return null;
+        if (!data.length) return null;
         const rows = data.map(item => {
             return (
                 <UserRow data={ item } key={ item.id } />

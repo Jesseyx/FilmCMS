@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import * as utils from '../utils';
 import SearchBox from './SearchBox';
 import TableBox from './TableBox';
 import Pagination from './Pagination';
@@ -9,13 +10,57 @@ const propTypes = {
 }
 
 class AdminListBox extends Component {
-    render() {
-        const { className, dataUrl } = this.props;
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            loading: true,
+            data: [],
+        }
+
+        this.handleSearchClick = this.handleSearchClick.bind(this);
+    }
+
+    componentWillMount() {
+        this.loadData();
+    }
+
+    loadData(query) {
+        const { dataUrl } = this.props;
+        const url = utils.concatUrl(dataUrl, query);
+        console.log('url = ' + url);
+        $.getJSON(url, function (json) {
+            const results = json.data;
+
+            this.setState({
+                data: results.data,
+                links: results.links,
+                loading: false,
+                per_page: results.per_page,
+                query: query,
+                total: results.total,
+            });
+        }.bind(this));
+    }
+
+    handleSearchClick() {
+        var query = $(this.refs.form).serialize();
+
+        if (query === this.state.query) {
+            return;
+        }
+
+        this.loadData(query);
+    }
+
+    render() {console.log(this.state);
+        const { className } = this.props;
+        const { data, loading } = this.state;
 
         return (
             <div className={ className + ' table-content' }>
                 <SearchBox>
-                    <form className="form-inline">
+                    <form className="form-inline" ref="form">
                         <div className="form-group">
                             <label htmlFor="status">状态：</label>
                             <select id="status" className="form-control" name="status">
@@ -37,7 +82,7 @@ class AdminListBox extends Component {
                             <input id="name" className="form-control" type="text" name="name" placeholder="姓名：" />
                         </div>
                         <div className="form-group" style={{ marginLeft: '15px' }}>
-                            <button className="btn btn-default" type="button">
+                            <button className="btn btn-default" type="button" onClick={ this.handleSearchClick }>
                                 <i className="fa fa-search"></i>
                                 <span>&nbsp;搜索</span>
                             </button>
@@ -45,7 +90,7 @@ class AdminListBox extends Component {
                     </form>
                 </SearchBox>
 
-                <TableBox dataUrl={ dataUrl }>
+                <TableBox data={ data } loading={ loading }>
                     
                 </TableBox>
 
