@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
-    value: PropTypes.string.isRequired,
+    value: PropTypes.any,
 }
 
 class CommonTd extends Component {

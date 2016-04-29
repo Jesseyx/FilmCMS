@@ -74,7 +74,7 @@ class TableBox extends Component {
                             <IconTh icon="envelope" value="邮箱" />
                             <SortTh icon="edit" value="最近登录时间" />
                             <SortTh icon="edit" value="注册时间" />
-                            <CommonTh value="最近登录" />
+                            <CommonTh value="最近登录IP" />
                             <CommonTh value="操作" />
                         </tr>
                     </thead>

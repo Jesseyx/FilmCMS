@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import CommonTd from '../components/CommonTd';
+import EditTd from '../components/EditTd';
+import ImageTd from '../components/ImageTd';
 
 const propTypes = {
     data: PropTypes.object.isRequired,
@@ -11,24 +13,16 @@ class UserRow extends Component {
         return (
             <tr>
                 <CommonTd value={ data.id } />
-                <td className="pointer">
-                    <p>王名杰</p>
-                </td>
-                <td>
-                    <img className="pointer" src="/assets/node_modules/admin-lte/dist/img/user2-160x160.jpg" width="60" height="60" />
-                </td>
-                <td className="pointer">
-                    <p>wangmingjie</p>
-                </td>
-                <td className="pointer">
-                    <p>13428282016</p>
-                </td>
-                <td className="pointer">
-                    <p>929936389@qq.com</p>
-                </td>
-                <td></td>
-                <td>-0001-11-30 00:00:00</td>
-                <td></td>
+                <EditTd className="pointer" value={ data.name } />
+                <ImageTd className="pointer" value={ data.avatar } />
+                <EditTd className="pointer" value={ data.username } />
+                <EditTd className="pointer" value={ data.cellphone } />
+                <EditTd className="pointer" value={ data.email } />
+                <CommonTd value={ data.last_login_at } />
+                <CommonTd value={ data.created_at } />
+                <CommonTd value={ data.last_ip } />
+
+
                 <td>
                     <a className="btn btn-default" href="/user/1/edit" target="_blank" style={{ marginBottom: '10px' }}>
                         <i className="fa fa-edit"></i>
