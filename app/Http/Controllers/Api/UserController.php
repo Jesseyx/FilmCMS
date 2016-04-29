@@ -13,8 +13,34 @@ class UserController extends Controller
     //
     function index(Request $request, $rows = 20)
     {
-        // Add an "order by" clause for a timestamp to the query.
-        $query = User::latest();
+        $inputs = $request->only('rows', 'status', 'id', 'username', 'name', 'orderBy');
+
+        $inputs['rows'] && $rows = intval($inputs['rows']);
+
+        // 必须有一个先生成 $query
+        if ($inputs['orderBy']) {
+            $orderBy = explode(',', $inputs['orderBy']);
+            $query = User::orderBy($orderBy[0], $orderBy[1]);
+        } else {
+            // Add an "order by" clause for a timestamp to the query.
+            $query = User::latest();
+        }
+
+        if ($inputs['status']) {
+            $query = $query->where('status', $inputs['status']);
+        }
+
+        if ($inputs['id']) {
+            $query = $query->where('id', $inputs['id']);
+        }
+
+        if ($inputs['username']) {
+            $query = $query->where('username', 'like', '%'.$inputs['username'].'%');
+        }
+
+        if ($inputs['username']) {
+            $query = $query->where('name', 'like', '%'.$inputs['name'].'%');
+        }
 
         $pager = $query -> paginate($rows);
 
