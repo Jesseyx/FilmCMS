@@ -38,7 +38,7 @@ class UserController extends Controller
             $query = $query->where('username', 'like', '%'.$inputs['username'].'%');
         }
 
-        if ($inputs['username']) {
+        if ($inputs['name']) {
             $query = $query->where('name', 'like', '%'.$inputs['name'].'%');
         }
 

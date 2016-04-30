@@ -7,9 +7,15 @@ import UserRow from '../containers/UserRow';
 const propTypes = {
     data: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
+    onSort: PropTypes.func.isRequired,
 }
 
 class TableBox extends Component {
+    constructor(props) {
+        super(props);
+        this.onAsc = this.onAsc.bind(this);
+        this.onDesc = this.onDesc.bind(this);
+    }
 
     renderLoading() {
         const { loading } = this.props;
@@ -19,6 +25,14 @@ class TableBox extends Component {
                 <i className="fa fa-refresh fa-spin"></i>
             </div>
         )
+    }
+
+    onAsc(field, sign) {
+        this.props.onSort(field, sign);
+    }
+
+    onDesc(field, sign) {
+        this.props.onSort(field, sign);
     }
 
     renderRows() {
@@ -48,8 +62,8 @@ class TableBox extends Component {
                             <IconTh icon="user" value="账号" />
                             <IconTh icon="mobile" value="手机" />
                             <IconTh icon="envelope" value="邮箱" />
-                            <SortTh icon="edit" value="最近登录时间" />
-                            <SortTh icon="edit" value="注册时间" />
+                            <SortTh icon="edit" value="最近登录时间" field="last_login_at" onAsc={ this.onAsc } onDesc={ this.onDesc } />
+                            <SortTh icon="edit" value="注册时间" field="created_at" onAsc={ this.onAsc } onDesc={ this.onDesc } />
                             <CommonTh value="最近登录IP" />
                             <CommonTh value="操作" />
                         </tr>

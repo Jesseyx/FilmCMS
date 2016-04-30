@@ -19,13 +19,18 @@ class AdminListBox extends Component {
         }
 
         this.handleSearchClick = this.handleSearchClick.bind(this);
+        this.handleSortClick = this.handleSortClick.bind(this);
+        this.handlePageClick = this.handlePageClick.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.loadData();
     }
 
     loadData(query) {
+        if (!query) {
+            query = $(this.refs.form).serialize();
+        }
         const { dataUrl } = this.props;
         const url = utils.concatUrl(dataUrl, query);
         console.log('url = ' + url);
@@ -44,12 +49,31 @@ class AdminListBox extends Component {
     }
 
     handleSearchClick() {
-        var query = $(this.refs.form).serialize();
+        const query = $(this.refs.form).serialize();
 
         if (query === this.state.query) {
             return;
         }
 
+        this.loadData(query);
+    }
+
+    handleSortClick(field, sign) {
+        const query = this.state.query + '&orderBy=' + field + ',' + sign;
+        this.loadData(query);
+    }
+
+    renderPagination() {
+        const { links, per_page, total } = this.state;
+        if (!total) {
+            return null;
+        }
+
+        return <Pagination links={ links } perPage={ per_page } total={ total } onPageClick={ this.handlePageClick } />
+    }
+
+    handlePageClick(url) {
+        const query = utils.getSearch(url);
         this.loadData(query);
     }
 
@@ -90,14 +114,9 @@ class AdminListBox extends Component {
                     </form>
                 </SearchBox>
 
-                <TableBox data={ data } loading={ loading }>
-                    
-                </TableBox>
+                <TableBox data={ data } loading={ loading } onSort={ this.handleSortClick } />
 
-
-                <Pagination>
-
-                </Pagination>
+                { this.renderPagination() }
             </div>
         )
     }
