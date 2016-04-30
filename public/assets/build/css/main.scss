@@ -40,8 +40,14 @@
     margin: 10px 0 0;
   }
 
-  td > p {
-    padding: 0 12px;
-    margin: 0;
+  td {
+    > p {
+      padding: 0 12px;
+      margin: 0;
+    }
+    > input {
+      display: inline-block;
+      width: 90%;
+    }
   }
 }
