@@ -1,89 +1,33 @@
 import React, { Component, PropTypes } from 'react';
-import * as utils from '../utils';
-import SearchBox from './SearchBox';
-import TableBox from './TableBox';
-import Pagination from './Pagination';
+import SearchHeader from '../components/SearchHeader';
 
 const propTypes = {
-    className: PropTypes.string,
-    dataUrl: PropTypes.string.isRequired
+    query: PropTypes.string,
+    onSearch: PropTypes.func.isRequired,
 }
 
-class AdminListBox extends Component {
+class SearchBox extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            loading: true,
-            data: [],
-        }
-
         this.handleSearchClick = this.handleSearchClick.bind(this);
-        this.handleSortClick = this.handleSortClick.bind(this);
-        this.handlePageClick = this.handlePageClick.bind(this);
-    }
-
-    componentDidMount() {
-        this.loadData();
-    }
-
-    loadData(query) {
-        if (!query) {
-            query = $(this.refs.form).serialize();
-        }
-        const { dataUrl } = this.props;
-        const url = utils.concatUrl(dataUrl, query);
-        console.log('url = ' + url);
-        $.getJSON(url, function (json) {
-            const results = json.data;
-
-            this.setState({
-                data: results.data,
-                links: results.links,
-                loading: false,
-                per_page: results.per_page,
-                query: query,
-                total: results.total,
-            });
-        }.bind(this));
     }
 
     handleSearchClick() {
         const query = $(this.refs.form).serialize();
 
-        if (query === this.state.query) {
+        if (query === this.props.query) {
             return;
         }
 
-        this.loadData(query);
+        this.props.onSearch(query);
     }
 
-    handleSortClick(field, sign) {
-        const query = this.state.query + '&orderBy=' + field + ',' + sign;
-        this.loadData(query);
-    }
-
-    renderPagination() {
-        const { links, per_page, total } = this.state;
-        if (!total) {
-            return null;
-        }
-
-        return <Pagination links={ links } perPage={ per_page } total={ total } onPageClick={ this.handlePageClick } />
-    }
-
-    handlePageClick(url) {
-        const query = utils.getSearch(url);
-        this.loadData(query);
-    }
-
-    render() {console.log(this.state);
-        const { className } = this.props;
-        const { data, loading } = this.state;
-
+    render() {
         return (
-            <div className={ className + ' table-content' }>
-                <SearchBox>
+            <div className="box box-success box-solid">
+                <SearchHeader />
+                <div className="box-body">
                     <form className="form-inline" ref="form">
                         <div className="form-group">
                             <label htmlFor="status">状态：</label>
@@ -112,16 +56,12 @@ class AdminListBox extends Component {
                             </button>
                         </div>
                     </form>
-                </SearchBox>
-
-                <TableBox data={ data } loading={ loading } onSort={ this.handleSortClick } />
-
-                { this.renderPagination() }
+                </div>
             </div>
         )
     }
 }
 
-AdminListBox.propTypes = propTypes;
+SearchBox.propTypes = propTypes;
 
-export default AdminListBox;
+export default SearchBox;

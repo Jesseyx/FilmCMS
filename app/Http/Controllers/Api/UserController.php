@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     //
-    function index(Request $request, $rows = 20)
+    function index(Request $request, $rows = 10)
     {
         $inputs = $request->only('rows', 'status', 'id', 'username', 'name', 'orderBy');
 
