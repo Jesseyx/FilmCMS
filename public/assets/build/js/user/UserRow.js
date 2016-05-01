@@ -13,7 +13,7 @@ class UserRow extends Component {
         return (
             <tr>
                 <CommonTd value={ data.id } />
-                <EditTd className="pointer" value={ data.name } />
+                <EditTd className="pointer" name="name" action="http://localhost:8000/user/ajax-edit" method="POST" type="" value={ data.name } data={{ id: data.id }} />
                 <ImageTd className="pointer" value={ data.avatar } />
                 <EditTd className="pointer" value={ data.username } />
                 <EditTd className="pointer" value={ data.cellphone } />

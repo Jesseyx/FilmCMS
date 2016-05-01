@@ -2,7 +2,12 @@ import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
     className: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    action: PropTypes.string.isRequired,
+    method: PropTypes.string,
+    type: PropTypes.string,
     value: PropTypes.string,
+    data: PropTypes.object.isRequired,
 }
 
 class EditTd extends Component {
@@ -29,34 +34,50 @@ class EditTd extends Component {
     }
 
     handleSubmit(e) {
-        var value = e.target.value.trim();
-        if (value === '' || value === this.props.value) {
+        let { name, action, method, data, value } = this.props;
+
+        const text = e.target.value.trim();
+        if (text === '' || text === value) {
             return this.setState({
                 editing: false,
             })
         }
-        //
-        console.log('ajax submit!');
-        this.setState({
-            editing: false,
-            value,
+        // ajax 提交
+        if (!method) method = 'POST';
+        data[name] = text;
+
+        $.ajax({
+            url: action,
+            type: method,
+            data,
+            dataType: 'json'
         })
+            .done(() => {
+
+            })
+            .fail((error) => {
+                console.log(error);
+
+                this.setState({
+                    error: true
+                })
+            });
     }
 
     render() {
         // 对象的解构需要 babel-preset-stage 支持，stage-1 可以
-        const { value, ...props } = this.props;
+        const { name, action, method, type, value, data,  ...props } = this.props;
         let element;
 
         if (this.state.editing) {
             element = <input
                 className="form-control"
-                defaultValue={ this.state.value }
+                defaultValue={ value }
                 onBlur={ this.handleSubmit }
                 ref="input"
             />
         } else {
-            element = <p>{ this.state.value }</p>;
+            element = <p>{ value }</p>;
         }
 
         return (
