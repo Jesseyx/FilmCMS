@@ -35,7 +35,7 @@ class Pagination extends Component {
                     <span>共</span>
                     <span>{ total }</span>
                     <span>条数据</span>
-                    <span>{ total < perPage ? 1 : Math.round(total / perPage) }</span>
+                    <span>{ total < perPage ? 1 : Math.ceil(total / perPage) }</span>
                     <span>页，每页</span>
                     <span>{ perPage }</span>
                     <span>行</span>

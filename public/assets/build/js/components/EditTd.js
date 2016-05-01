@@ -16,11 +16,11 @@ class EditTd extends Component {
             submitting: false,
         }
 
-        this.handleEditClick = this.handleEditClick.bind(this);
+        this.handleDoubleClick = this.handleDoubleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleEditClick() {
+    handleDoubleClick() {
         this.setState({
             editing: true
         }, () => {
@@ -44,26 +44,27 @@ class EditTd extends Component {
     }
 
     render() {
-        const { value, props } = this.props;
+        // 对象的解构需要 babel-preset-stage 支持，stage-1 可以
+        const { value, ...props } = this.props;
+        let element;
 
         if (this.state.editing) {
-            return (
-                <td { ...props }>
-                    <input
-                        className="form-control"
-                        defaultValue={ this.state.value }
-                        onBlur={ this.handleSubmit }
-                        ref="input"
-                    />
-                </td>
-            )
+            element = <input
+                className="form-control"
+                defaultValue={ this.state.value }
+                onBlur={ this.handleSubmit }
+                ref="input"
+            />
+        } else {
+            element = <p>{ this.state.value }</p>;
         }
+
         return (
             <td
                 { ...props }
-                onClick={ this.handleEditClick }
+                onDoubleClick={ this.handleDoubleClick }
             >
-                <p>{ this.state.value }</p>
+                { element }
             </td>
         )
     }
