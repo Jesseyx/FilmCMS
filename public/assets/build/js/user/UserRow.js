@@ -15,9 +15,9 @@ class UserRow extends Component {
                 <CommonTd value={ data.id } />
                 <EditTd className="pointer" name="name" action="http://localhost:8000/user/ajax-edit" method="POST" type="" value={ data.name } data={{ id: data.id }} />
                 <ImageTd className="pointer" value={ data.avatar } />
-                <EditTd className="pointer" value={ data.username } />
-                <EditTd className="pointer" value={ data.cellphone } />
-                <EditTd className="pointer" value={ data.email } />
+                <EditTd className="pointer" name="username" action="http://localhost:8000/user/ajax-edit" value={ data.username } data={{ id: data.id }} />
+                <EditTd className="pointer" name="cellphone" action="http://localhost:8000/user/ajax-edit" value={ data.cellphone } data={{ id: data.id }} />
+                <EditTd className="pointer" name="email" action="http://localhost:8000/user/ajax-edit" value={ data.email } data={{ id: data.id }} />
                 <CommonTd value={ data.last_login_at } />
                 <CommonTd value={ data.created_at } />
                 <CommonTd value={ data.last_ip } />

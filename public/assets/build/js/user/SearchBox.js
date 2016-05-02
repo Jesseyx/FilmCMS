@@ -39,15 +39,15 @@ class SearchBox extends Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="userId">用户id：</label>
-                            <input id="userId" className="form-control" type="text" name="id" placeholder="用户id：" />
+                            <input id="userId" className="form-control" type="text" name="id" placeholder="用户id" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="username">用户名：</label>
-                            <input id="username" className="form-control" type="text" name="username" placeholder="用户名：" />
+                            <input id="username" className="form-control" type="text" name="username" placeholder="用户名" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="name">姓名：</label>
-                            <input id="name" className="form-control" type="text" name="name" placeholder="姓名：" />
+                            <input id="name" className="form-control" type="text" name="name" placeholder="姓名" />
                         </div>
                         <div className="form-group" style={{ marginLeft: '15px' }}>
                             <button className="btn btn-default" type="button" onClick={ this.handleSearchClick }>
