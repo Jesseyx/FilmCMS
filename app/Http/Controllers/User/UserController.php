@@ -70,6 +70,12 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $user = User::findOrFail($id);
+        $roleIds = $user->roles()->get()->map(function ($role) {
+            return $role->id;
+        })->toArray();
+        
+        return view('user.edit', compact('user', 'roleIds'));
     }
 
     /**
