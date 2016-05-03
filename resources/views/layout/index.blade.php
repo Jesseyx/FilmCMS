@@ -6,6 +6,7 @@
     <title>MY-Admin 后台管理系统</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href={{ cssAsset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}>
     <!-- Font Awesome -->
@@ -357,6 +358,8 @@
 <script src={{ jsAsset('node_modules/admin-lte/plugins/fastclick/fastclick.js') }}></script>
 <!-- AdminLTE App -->
 <script src={{ jsAsset('node_modules/admin-lte/dist/js/app.min.js') }}></script>
+<!-- patchFix -->
+<script src={{ jsAsset('build/js/patchFix.js') }}></script>
 
 @yield('footer')
 </body>

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -114,5 +117,46 @@ class UserController extends Controller
 
         // 将输入存储到一次性 Session 然后重定向, "基础--HTTP 请求"
         return back()->withInput();
+    }
+
+    public function ajaxEdit(Request $request)
+    {
+        $inputs = $request->only(['id', 'username', 'name', 'cellphone', 'email', 'status']);
+
+        $validator = Validator::make($inputs, [
+            'id' => 'required',
+            'username' => 'min:6|unique:users,username,'.$inputs['id'],
+            'cellphone' => 'digits:11',
+            'email' => 'email',
+            'status' => 'integer'
+        ], [
+            'id.required' => '缺少ID',
+            'username.min' => '账号不能小于6个字符',
+            'username.unique' => '该帐号已经被注册过',
+            'cellphone.digits' => '手机号码不正确',
+            'email' => '邮箱格式不正确',
+            'status.integer' => '请选择状态',
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->errors();
+            return response()->json(['status' => 400, 'msg' => $messages]);
+        }
+
+        $user = User::findOrFail($inputs['id']);
+        $inputs['username'] && $user->username = $inputs['username'];
+        $inputs['name'] && $user->name = $inputs['name'];
+        $inputs['cellphone'] && $user->cellphone = $inputs['cellphone'];
+        $inputs['email'] && $user->email = $inputs['email'];
+        $inputs['status'] && $user->status = $inputs['status'];
+
+        // 使用事务
+        // use, 一个新鲜的家伙...
+        // 众所周知, 闭包: 内部函数使用了外部函数中定义的变量.
+        DB::transaction(function () use ($user, $inputs) {
+            $user->save();
+        });
+
+        return response()->json(['status' => 200]);
     }
 }

@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('profile', 'UserController@getProfile');
             Route::get('edit', 'UserController@getEdit');
             Route::post('edit', 'UserController@postEdit');
+            Route::post('ajax-edit', 'UserController@ajaxEdit');
         });
 
         Route::resource('user', 'UserController');
