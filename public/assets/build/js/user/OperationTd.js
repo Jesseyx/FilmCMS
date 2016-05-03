@@ -21,10 +21,10 @@ class OperationTd extends Component {
 
     renderOperation() {
         const { value, data, ...props } = this.props;
-        const { isVisible } = this.state;
+        const { isVisible } = this.state; console.log(this.state);
         let element;
 
-        if (isVisible >= 0) {;
+        if (isVisible > 0) {;
             element = <AjaxAnchor
                 { ...props }
                 data={{ id: data.id, status: -1}}
@@ -51,7 +51,7 @@ class OperationTd extends Component {
 
     handleSuccess(res, options) {
         return this.setState({
-            isVisible: !options.data.status,
+            isVisible: options.data.status,
         })
     }
 

@@ -28,7 +28,7 @@ class AjaxAnchor extends Component {
             data,
             dataType: 'json',
         })
-            .done(function (res) {
+            .done((res) => {
                 if (res.status === 200) {
                     onSuccess(res, {
                         action,
@@ -43,7 +43,7 @@ class AjaxAnchor extends Component {
                     })
                 }
             })
-            .fail(function (err) {
+            .fail((err) => {
                 onError(err, {
                     action,
                     method,

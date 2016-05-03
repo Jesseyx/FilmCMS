@@ -52,8 +52,13 @@ class EditTd extends Component {
             data,
             dataType: 'json'
         })
-            .done(() => {
-
+            .done((res) => {
+                if (res.status === 200) {
+                    this.setState({
+                        'editing': false,
+                        'value': text,
+                    })
+                }
             })
             .fail((error) => {
                 console.log(error);
@@ -72,12 +77,12 @@ class EditTd extends Component {
         if (this.state.editing) {
             element = <input
                 className="form-control"
-                defaultValue={ value }
+                defaultValue={ this.state.value }
                 onBlur={ this.handleSubmit }
                 ref="input"
             />
         } else {
-            element = <p>{ value }</p>;
+            element = <p>{ this.state.value }</p>;
         }
 
         return (
