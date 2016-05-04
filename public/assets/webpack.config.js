@@ -7,6 +7,7 @@ module.exports = {
     context: path.join(__dirname, 'build', 'js'),
     entry: {
         user_index: ['./user/index'],
+        user_edit: ['./user/edit'],
     },
     output: {
         path: path.join(__dirname, 'dist', 'js'),
@@ -21,4 +22,9 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        alias: {
+            'jquery': path.join('jquery', 'dist', 'jquery'),
+        }
+    }
 }

@@ -88,3 +88,9 @@
 
     </section><!-- /.content -->
 @stop
+
+@section('footer')
+    <script src="{{ jsAsset('node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}"></script>
+    <script src="{{ jsAsset('node_modules/blueimp-file-upload/js/jquery.fileupload.js') }}"></script>
+    <script src="{{ jsAsset('dist/js/user_edit.bundle.js') }}"></script>
+@stop
