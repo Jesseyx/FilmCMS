@@ -19,7 +19,7 @@
 
         @include('errors.list')
 
-        {{ Form::model($user, ['url' => url('user', $user->id), 'class' => 'form-horizontal']) }}
+        {{ Form::model($user, ['method' => 'PUT', 'url' => url('user', $user->id), 'class' => 'form-horizontal']) }}
             <div class="form-group">
                 {{ Form::label('username', '帐号：', ['class' => 'col-sm-2 control-label']) }}
                 <div class="col-sm-10 col-md-3">
@@ -37,14 +37,23 @@
             <div class="form-group">
                 {{ Form::label('name', '头像：', ['class' => 'col-sm-2 control-label']) }}
                 <div class="col-sm-10 col-md-3">
-                    {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => '请输入头像']) }}
+                    <img class="img-circle" src="{{ imgAsset($user->avatar) }}" alt="User Image" width="80" height="80">
+                    {{ Form::hidden('avatar', null) }}
+                    <span class="btn btn-success file-hidden-cover" type="button">
+                        <i class="fa fa-upload"></i> 上传(可选)
+                        {{ Form::file('file', ['id' => 'JAvatarFile', 'class' => 'file-hidden']) }}
+                    </span>
                 </div>
             </div>
 
             <div class="form-group">
                 {{ Form::label('cellphone', '角色：', ['class' => 'col-sm-2 control-label']) }}
                 <div class="col-sm-10 col-md-3">
-                    {{ Form::text('cellphone', null, ['class' => 'form-control', 'placeholder' => '请输入角色']) }}
+                    <select class="form-control" name="roles[]" multiple="multiple">
+                        @foreach(\App\Role::enable()->get() as $key => $role)
+                            <option value="{{ $role->id }}"{{ in_array($role->id, $roleIds) ? ' selected="selected"' : '' }}>{{ $role->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
@@ -65,7 +74,7 @@
             <div class="form-group">
                 {{ Form::label('password', '密码：', ['class' => 'col-sm-2 control-label']) }}
                 <div class="col-sm-10 col-md-3">
-                    {{ Form::text('password', null, ['class' => 'form-control', 'placeholder' => '请输入密码']) }}
+                    {{ Form::text('password', '', ['class' => 'form-control', 'placeholder' => '请输入密码']) }}
                 </div>
             </div>
 
