@@ -87,6 +87,8 @@
                 <!-- Your Page Content Here -->
 
     </section><!-- /.content -->
+
+    <div id="cropContainer"></div>
 @stop
 
 @section('footer')

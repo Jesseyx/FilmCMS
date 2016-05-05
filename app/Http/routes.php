@@ -39,7 +39,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     // password
     Route::group(['namespace' => 'Password'], function () {
+        // 参考 image 的解释
         Route::controller('password', 'PasswordController');
+    });
+
+    // image
+    Route::group(['namespace' => 'Image'], function () {
+        // 控制器方法 postUpload 处理 url 为 /image/upload method 为 post 的请求
+        Route::controller('image', 'ImageController');
     });
 });
 
