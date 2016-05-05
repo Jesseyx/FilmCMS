@@ -160,4 +160,9 @@ class ImageController extends Controller
     {
         return str_random(32);
     }
+
+    private function success($data)
+    {
+        dd($data);
+    }
 }
