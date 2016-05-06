@@ -29,7 +29,7 @@ return [
                 'max_file_size' => 2 * 1024 * 1024,
                 // 缩略图
                 'thumbnails' => [
-                    ['width' => 100, 'height' => 100],
+                    ['width' => 300, 'height' => 300],
                 ]
             ],
         ],

@@ -66,3 +66,28 @@
     direction: ltr;
   }
 }
+
+.crop-thumbnails-container {
+  margin-top: 10px;
+  > ul {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    list-style: none;
+    > li {
+      display: inline-block;
+      padding: 10px;
+      .img-rounded {
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.crop-origin-container {
+  margin: 0 auto;
+  .origin-img {
+    display: block;
+    visibility: visible;
+  }
+}

@@ -32,7 +32,7 @@ class ImageController extends Controller
         self::STATUS_UNKNOWN_TYPE => 'Unknown Type',
         self::STATUS_FILE_TOO_SMALL => '您上传的文件太小啦！',
         self::STATUS_FILE_TOO_LARGE => '您上传的文件太大啦！',
-        self::STATUS_FILE_TYPE_ERROR => '图片格式错误，仅支持jpg，png，gif类型的文件！',
+        self::STATUS_FILE_TYPE_ERROR => '文件格式错误，仅支持jpg，png，gif类型的文件！',
         self::STATUS_FILE_INVALID => '文件未上传成功！',
         self::STATUS_ORIGIN_DISK_SAVE_ERROR => '保存文件到磁盘失败！',
         self::STATUS_ORIGIN_DB_SAVE_ERROR => '数据库保存失败！',
@@ -163,6 +163,8 @@ class ImageController extends Controller
 
     private function success($data)
     {
-        dd($data);
+        return response()
+            ->json(['status' => 200, 'data' => $data])
+            ->header('Content-Type', 'text/html');
     }
 }
