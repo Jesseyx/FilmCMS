@@ -87,8 +87,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        dd('asdasd');
+        $inputs = $request->only(['username', 'name', 'avatar', 'roles', 'cellphone', 'email', 'password']);
+
+        $user = User::findOrFail($id);
+        $user->username = $inputs['username'];
+        $user->name = $inputs['name'];
+        $user->avatar = parse_url($inputs['avatar'])['path'];
+        $user->cellphone = $inputs['cellphone'];
+        $user->email = $inputs['email'];
+        $inputs['password'] && $user->password = bcrypt($inputs['password']);
+
+        // 开启事务
+        DB::transation(function () use($user, $inputs) {
+            $user->save();
+            $user->roles()->sync($inputs['roles']);
+        });
+
+        return back();
     }
 
     /**
