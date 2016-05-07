@@ -7,6 +7,7 @@ const propTypes = {
     maxHeight: PropTypes.number.isRequired,
     ratio: PropTypes.number.isRequired,
     selectAreaWidth: PropTypes.number,
+    onSelect: PropTypes.func.isRequired,
 }
 
 class CropMain extends Component {
@@ -21,8 +22,8 @@ class CropMain extends Component {
         const $target = $(this.refs['crop-target']);
         const $cropContainer = $(this.refs['crop-container']);
 
-        $target.load(() => {console.log('load');
-            // 2.x 版本不知什么原因触发两次 load 事件，后面再研究
+        $target.load(() => {
+            // 2.x 版本不知什么原因触发两次 load 事件，后面再研究，2.x 的版本 bug 太多了，退回 0.9.12 版本
             $target.unbind('load');
 
             this.adjustSize((finalSize) => {
@@ -34,7 +35,7 @@ class CropMain extends Component {
                         this.handleCropChange(c);
                     },
                     onSelect: (c) => {
-                        this.handleCropSelect(c);
+                        this.handleCropSelect(c, finalSize);
                     }
                 }, function () {
                     // 不能使用箭头函数
@@ -71,6 +72,9 @@ class CropMain extends Component {
                 }
             }
 
+            // 保存缩放比例，等比缩放的
+            finalSize.scale = width / finalSize.width;
+
             const target = this.refs['crop-target'],
                 targetParent = target.parentNode;
             target.style.width = finalSize.width + 'px';
@@ -103,12 +107,42 @@ class CropMain extends Component {
     }
 
     handleCropChange(c) {
-        const $thumbnailsContainer = $(this.refs['thumbnails-container']);
+        const $thumbnailsContainer = $(this.refs['thumbnails-container']),
+            $previewImages = $thumbnailsContainer.find('.thumbnail-img'),
+            cropper = this.Jcrop;
+        let $img, $container, pWidth, pHeight, rX, rY, bounds, boundX, boundY;
 
+        // 先转化为整型
+        if (~~c.w > 0 && cropper) {
+            $previewImages.each((i, elem) => {
+                $img = $(elem),
+                $container = $img.parent(),
+                pWidth = $container.width(),
+                pHeight = $container.height(),
+                rX = pWidth / c.w,
+                rY = pHeight / c.h,
+                bounds = cropper.getBounds(),
+                boundX = bounds[0],
+                boundY = bounds[1];
+
+                $img.css({
+                    width:  Math.round(rX * boundX) + 'px',
+                    height: Math.round(rY * boundY) + 'px',
+                    marginLeft: -Math.round(rX * c.x) + 'px',
+                    marginTop: -Math.round(rY * c.y) + 'px',
+                });
+            });
+        }
     }
 
-    handleCropSelect(c) {
-
+    handleCropSelect(c, finalSize) {
+        this.props.onSelect({
+            x: c.x,
+            y: c.y,
+            w: c.w,
+            h: c.h,
+            scale: finalSize.scale
+        });
     }
 
     renderThumbnailItems() {
@@ -123,7 +157,7 @@ class CropMain extends Component {
                         className="img-rounded"
                         style={{ width: thumbnail.width, height: thumbnail.height }}
                     >
-                        <img src={ origin.src } />
+                        <img className="thumbnail-img" src={ origin.src } />
                     </div>
 
                     <p >{ thumbnail.width }x{ thumbnail.height } </p>

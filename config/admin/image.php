@@ -33,5 +33,18 @@ return [
                 ]
             ],
         ],
+
+        'crop' => [
+            'user_avatar' => [
+                'origin_path' => public_path('uploads/images'),
+                'base_path' => public_path('uploads/images'),
+                'base_url' => 'http://localhost:8000/uploads/images',
+                // 缩略图
+                'thumbnails' => [
+                    ['width' => 60, 'height' => 60],
+                    ['width' => 80, 'height' => 80],
+                ]
+            ]
+        ]
     ],
 ];

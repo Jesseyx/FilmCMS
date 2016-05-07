@@ -48,7 +48,7 @@ $(function () {
                         thumbnails={ thumbnails }
                         success={
                             (res) => {
-                                console.log(res);
+                                $('#avatarInput').val(res.data.url).prev('img').prop('src', res.data.url);
                             }
                         }
                         fail={
@@ -59,8 +59,6 @@ $(function () {
                     />,
                     container,
                 );
-
-                console.log(res);
             }
         }
     })

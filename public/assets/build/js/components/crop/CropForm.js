@@ -14,6 +14,7 @@ class CropForm extends Component {
                 <input type="hidden" name="y" ref="y" value={ area.y } />
                 <input type="hidden" name="w" ref="w" value={ area.w } />
                 <input type="hidden" name="h" ref="h" value={ area.h } />
+                <input type="hidden" name="scale" ref="scale" value={ area.scale } />
             </form>
         )
     }

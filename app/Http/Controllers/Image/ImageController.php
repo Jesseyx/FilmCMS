@@ -22,6 +22,9 @@ class ImageController extends Controller
     const STATUS_ORIGIN_DB_SAVE_ERROR = 5006;
     const STATUS_MAKE_THUMBNAIL_ERROR = 5007;
     const STATUS_THUMBNAIL_DISK_SAVE_ERROR = 5008;
+    const STATUS_NO_SUCH_FILE_HAVE_UPLOADED = 5009;
+    const STATUS_UPLOADED_FILE_NOT_FOUND = 50010;
+    const STATUS_FAIL_TO_CROP_FILE = 50011;
 
     private $type;
     private $config;
@@ -37,7 +40,10 @@ class ImageController extends Controller
         self::STATUS_ORIGIN_DISK_SAVE_ERROR => '保存文件到磁盘失败！',
         self::STATUS_ORIGIN_DB_SAVE_ERROR => '数据库保存失败！',
         self::STATUS_MAKE_THUMBNAIL_ERROR => '制作缩略图失败！',
-        self::STATUS_THUMBNAIL_DISK_SAVE_ERROR => '缩略图保存失败',
+        self::STATUS_THUMBNAIL_DISK_SAVE_ERROR => '缩略图保存失败！',
+        self::STATUS_NO_SUCH_FILE_HAVE_UPLOADED => '未找到图片的原始上传记录！',
+        self::STATUS_UPLOADED_FILE_NOT_FOUND => '未找到图片的原始上传素材',
+        self::STATUS_FAIL_TO_CROP_FILE => '裁剪图片失败！',
 
     ];
 
@@ -83,10 +89,9 @@ class ImageController extends Controller
                 if ($uploadFile->save()) {
                     $url = $this->config['base_url'] . '/' . $relativePath . '/' . $name . '.' .$uploadFile->ext;
 
+                    $thumbnails = [];
                     // 制作缩略图
                     if (@ $this->config['thumbnails']) {
-                        $thumbnails = [];
-
                         $img = Image::make($absPath . '/' . $name . '.' . $uploadFile->ext);
                         foreach ($this->config['thumbnails'] as $thumbnail) {
                             // 备份一份
@@ -166,5 +171,70 @@ class ImageController extends Controller
         return response()
             ->json(['status' => 200, 'data' => $data])
             ->header('Content-Type', 'text/html');
+    }
+    
+    public function getCrop(Request $request) {
+        $this->config = config('admin.image.operations.crop.' . $this->type);
+        if (empty($this->config)) {
+            $this->status = self::STATUS_UNKNOWN_TYPE;
+            return $this->abort($this->status);
+        }
+
+        $inputs = $request->only(['x', 'y', 'w', 'h', 'id', 'type']);
+
+        $originUploadFile = UploadFile::findOrFail($inputs['id']);
+
+        if (!$originUploadFile) {
+            return $this->abort(self::STATUS_NO_SUCH_FILE_HAVE_UPLOADED);
+        }
+
+        $relativePath = $originUploadFile->path . '/' .$originUploadFile->name . '.' .$originUploadFile->ext;
+        $absPath = $this->config['origin_path'] . '/' . $relativePath;
+
+        try {
+            $img = Image::make($absPath);
+        } catch (\Exception $e) {
+            return $this->abort(self::STATUS_UPLOADED_FILE_NOT_FOUND);
+        }
+
+        if ($img->crop(intval($inputs['w']), intval($inputs['h']), intval($inputs['x']), intval($inputs['y']))) {
+            $newRelPath = $originUploadFile->path . '/' . substr($originUploadFile->name, 2) . '.' .$originUploadFile->ext;
+            $newAbsPath = $this->config['base_path'] . '/' . $newRelPath;
+
+            if ($img->save($newAbsPath)) {
+                $url = $this->config['base_url'] . '/' . $newRelPath;
+
+                $thumbnails = [];
+                // 制作缩略图
+                if (@ $this->config['thumbnails']) {
+                    foreach ($this->config['thumbnails'] as $thumbnail) {
+                        // 备份一份
+                        $img->backup();
+
+                        if (!$img->resize($thumbnail['width'], $thumbnail['height'])) {
+                            return $this->abort(self::STATUS_MAKE_THUMBNAIL_ERROR);
+                        }
+
+                        $newThumbnailAbsPath = $this->config['base_path'] . '/' . $originUploadFile->path . '/' . $thumbnail['width'] . 'x' . $thumbnail['height'] . '_' . substr($originUploadFile->name, 2) . '.' . $originUploadFile->ext;
+
+                        // 保存
+                        if (!$img->save($newThumbnailAbsPath)) {
+                            return $this->abort(self::STATUS_THUMBNAIL_DISK_SAVE_ERROR);
+                        }
+
+                        $thumbnails[] = $this->config['base_url'] . '/' . $originUploadFile->path . '/' . $thumbnail['width'] . 'x' . $thumbnail['height'] . '_' . substr($originUploadFile->name, 2) . '.' . $originUploadFile->ext;
+
+                        // 复原
+                        $img->reset();
+                    }
+                }
+
+                return $this->success(['url' => $url, 'thumbnails' => $thumbnails]);
+            } else {
+                return $this->abort(self::STATUS_ORIGIN_DISK_SAVE_ERROR);
+            }
+        } else {
+            $this->abort(self::STATUS_FAIL_TO_CROP_FILE);
+        }
     }
 }

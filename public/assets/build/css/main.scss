@@ -90,4 +90,8 @@
     display: block;
     visibility: visible;
   }
+  // 去掉 radio
+  .jcrop-keymgr {
+    left: -9999px !important;
+  }
 }

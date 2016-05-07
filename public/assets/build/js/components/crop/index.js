@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import CropForm from './CropForm';
 import CropMain from './CropMain';
 
+// 其实 form 表单没用了，因为数据已经在 state 里面存储了
 const propTypes = {
     // 元数据
     origin: PropTypes.object.isRequired,
@@ -29,6 +30,9 @@ class CropImage extends Component {
     constructor(props) {
         super(props);
 
+        this.handleCropSelect = this.handleCropSelect.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
         this.state = {
             submitting: false,
             area: {
@@ -36,6 +40,7 @@ class CropImage extends Component {
                 y: 0,
                 w: 0,
                 h: 0,
+                scale: 1,
             }
         }
     }
@@ -48,6 +53,46 @@ class CropImage extends Component {
             // 箭头函数无需绑定 this
             ReactDOM.unmountComponentAtNode(this.refs.modal.parentNode);
         });
+    }
+
+    handleCropSelect(area) {
+        this.setState({
+            area
+        });
+    }
+
+    handleSubmit() {
+        if (this.state.submitting) {
+            return;
+        }
+
+        this.setState({
+            submitting: true
+        });
+
+        const { action, data, origin, success, fail } = this.props;
+        const { area } = this.state;
+        const params = {
+            id: origin.id,
+            x: area.x * area.scale,
+            y: area.y * area.scale,
+            w: area.w * area.scale,
+            h: area.h * area.scale,
+        };
+
+        $.getJSON(action, Object.assign(params, data))
+            .done(res => {
+                this.setState({ submitting: false });
+                if (res.status === 200) {
+                    $(this.refs.modal).modal('hide');
+                    success && success(res);
+                } else {
+                    fail && fail(res);
+                }
+            })
+            .fail(err => {
+                fail && fail(err);
+            });
     }
 
     render() {
@@ -74,6 +119,7 @@ class CropImage extends Component {
                                 maxHeight={ maxHeight }
                                 ratio={ ratio }
                                 selectAreaWidth={ selectAreaWidth }
+                                onSelect={ this.handleCropSelect }
                             />
                         </div>
 
@@ -81,7 +127,9 @@ class CropImage extends Component {
                             <button className="btn btn-default" type="button" data-dismiss="modal">关闭</button>
                             <button
                                 className={ "btn btn-primary" + (submitting ? ' disabled' : '') }
-                                type="button">
+                                type="button"
+                                onClick={ this.handleSubmit }
+                            >
                                 裁切{ submitting ? '中...' : '' }
                             </button>
                         </div>
