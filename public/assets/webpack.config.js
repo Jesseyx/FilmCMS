@@ -8,6 +8,7 @@ module.exports = {
     entry: {
         user_index: ['./user/index'],
         user_edit: ['./user/edit'],
+        user_create: ['./user/create'],
     },
     output: {
         path: path.join(__dirname, 'dist', 'js'),

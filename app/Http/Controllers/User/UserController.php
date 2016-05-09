@@ -39,6 +39,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('user.create');
     }
 
     /**
@@ -47,9 +48,26 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\UserStoreAndUpdate $request)
     {
         //
+        $inputs = $request->only(['username', 'name', 'avatar', 'roles', 'cellphone', 'email', 'password']);
+        $user = new User();
+
+        $user->username = $inputs['username'];
+        $user->name = $inputs['name'];
+        $user->avatar = parse_url($inputs['avatar'])['path'];
+        $user->cellphone = $inputs['cellphone'];
+        $user->email = $inputs['email'];
+        $user->password = $inputs['password'] ? bcrypt($inputs['password']) : bcrypt('123456');
+
+        // 开启事务
+        DB::transaction(function () use ($user, $inputs) {
+            $user->save();
+            $user->roles()->attach($inputs['roles']);
+        });
+
+        return redirect('user');
     }
 
     /**
@@ -87,7 +105,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\UserStoreAndUpdate $request, $id)
     {
         $inputs = $request->only(['username', 'name', 'avatar', 'roles', 'cellphone', 'email', 'password']);
 
