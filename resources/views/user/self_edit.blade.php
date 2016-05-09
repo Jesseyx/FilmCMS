@@ -19,7 +19,7 @@
 
         @include('errors.list')
 
-        {{ Form::model($user, ['url' => '/user/edit', 'class' => 'form-horizontal']) }}
+        {{ Form::model($_user, ['url' => '/user/edit', 'class' => 'form-horizontal']) }}
             <div class="form-group">
                 {{ Form::label('cellphone', '手机：', ['class' => 'col-sm-2 control-label']) }}
                 <div class="col-sm-10 col-md-3">

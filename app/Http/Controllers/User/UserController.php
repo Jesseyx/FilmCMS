@@ -98,7 +98,7 @@ class UserController extends Controller
         $inputs['password'] && $user->password = bcrypt($inputs['password']);
 
         // 开启事务
-        DB::transation(function () use($user, $inputs) {
+        DB::transaction(function () use($user, $inputs) {
             $user->save();
             $user->roles()->sync($inputs['roles']);
         });

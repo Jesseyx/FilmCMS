@@ -21,7 +21,7 @@ class OperationTd extends Component {
 
     renderOperation() {
         const { value, data, ...props } = this.props;
-        const { isVisible } = this.state; console.log(this.state);
+        const { isVisible } = this.state;
         let element;
 
         if (isVisible > 0) {;
@@ -60,11 +60,13 @@ class OperationTd extends Component {
     }
 
     render() {
+        const { data } = this.props;
+
         return (
             <td>
                 <a
                     className="btn btn-default"
-                    href="/user/1/edit"
+                    href={ '/user/' + data.id + '/edit' }
                     target="_blank"
                     style={{ marginBottom: '10px' }}
                 >

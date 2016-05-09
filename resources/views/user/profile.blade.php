@@ -41,13 +41,13 @@
         <div class="container-fluid">
             <div class="row">
                 <label class="col-xs-4 col-sm-2">姓名：</label>
-                <div class="col-xs-8 col-sm-10"><p>{{ $user->name }}</p></div>
+                <div class="col-xs-8 col-sm-10"><p>{{ $_user->name }}</p></div>
             </div>
 
             <div class="row">
                 <label class="col-xs-4 col-sm-2">头像：</label>
                 <div class="col-xs-8 col-sm-10">
-                    <img class="img-circle" src="{{ imgAsset($user->avatar) }}" alt="User Image" style="width: 80px; height: 80px;">
+                    <img class="img-circle" src="{{ imgAsset($_user->avatar) }}" alt="User Image" style="width: 80px; height: 80px;">
                 </div>
             </div>
 
@@ -55,10 +55,10 @@
                 <label class="col-xs-4 col-sm-2">角色：</label>
                 <div class="col-xs-8 col-sm-10">
                     <p>
-                        @if(in_array($user->username, config('admin.backend.authority.supers')))
+                        @if(in_array($_user->username, config('admin.backend.authority.supers')))
                             <small class="label bg-green"> 超级管理员</small>
                         @else
-                            @foreach($user->roles as $role)
+                            @foreach($_user->roles as $role)
                                 <small class="label bg-green">{{ $role->name }}</small> {{ ' ' }}
                             @endforeach
                         @endif
@@ -70,14 +70,14 @@
                 <label class="col-xs-4 col-sm-2">权限：</label>
                 <div class="col-xs-8 col-sm-10">
                     <p>
-                        @if(in_array($user->username, config('admin.backend.authority.supers')))
+                        @if(in_array($_user->username, config('admin.backend.authority.supers')))
                             <small class="label bg-yellow"> 所有权限</small>
                         @else
                             @foreach(config('admin.backend.authority.ignores') as $ignore)
                                 <small class="label bg-yellow">{{ $ignore['name'] }}</small>
                                 {{ ' ' }}
                             @endforeach
-                            @foreach($user->permissions() as $permission)
+                            @foreach($_user->permissions() as $permission)
                                 <small class="label bg-yellow">{{ $permission->name }}</small>
                                 {{ ' ' }}
                             @endforeach
@@ -90,7 +90,7 @@
                 <label class="col-xs-4 col-sm-2">手机：</label>
                 <div class="col-xs-8 col-sm-10">
                     <p>
-                        {{ $user->cellphone ? $user->cellphone : '未填写' }}
+                        {{ $_user->cellphone ? $_user->cellphone : '未填写' }}
                     </p>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                 <label class="col-xs-4 col-sm-2">邮箱：</label>
                 <div class="col-xs-8 col-sm-10">
                     <p>
-                        {{ $user->email ? $user->email : '未填写' }}
+                        {{ $_user->email ? $_user->email : '未填写' }}
                     </p>
                 </div>
             </div>
@@ -107,7 +107,7 @@
             <div class="row">
                 <label class="col-xs-4 col-sm-2">创建时间：</label>
 
-                <div class="col-xs-8 col-sm-10"><p>{{ $user->created_at }}</p></div>
+                <div class="col-xs-8 col-sm-10"><p>{{ $_user->created_at }}</p></div>
             </div>
         </div>
         <!-- Your Page Content Here -->

@@ -56,17 +56,17 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ imgAsset($user->avatar) }}" class="user-image" alt="User Image">
-                            <span class="hidden-xs">{{ $user->name }}</span>
+                            <img src="{{ imgAsset($_user->avatar) }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ $_user->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{ imgAsset($user->avatar) }}" class="img-circle" alt="User Image">
+                                <img src="{{ imgAsset($_user->avatar) }}" class="img-circle" alt="User Image">
 
                                 <p>
-                                    {{ $user->name }} - Web Developer
-                                    <small>创建时间 {{ $user->created_at }}</small>
+                                    {{ $_user->name }} - Web Developer
+                                    <small>创建时间 {{ $_user->created_at }}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -113,10 +113,10 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ imgAsset($user->avatar) }}" class="img-circle" alt="User Image">
+                    <img src="{{ imgAsset($_user->avatar) }}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>{{ $user->name }}</p>
+                    <p>{{ $_user->name }}</p>
                     {{--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>--}}
                     <a href="#" style="display: inline-block; max-width: 140px; text-overflow: ellipsis; overflow: hidden;"><i class="fa fa-circle text-success"></i> 超级管理员</a>
                 </div>
