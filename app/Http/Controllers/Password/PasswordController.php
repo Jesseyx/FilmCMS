@@ -12,9 +12,11 @@ use Illuminate\Support\MessageBag;
 
 class PasswordController extends Controller
 {
+    private $_user;
+
     public function __construct()
     {
-        $this->user = Auth::user();
+        $this->_user = Auth::user();
     }
 
     //
@@ -26,13 +28,13 @@ class PasswordController extends Controller
     public function postReset(Requests\PassswordResetRequest $request)
     {
         $oldPwd = $request->input('old_password');
-        if (!Hash::check($oldPwd, $this->user->password)) {
+        if (!Hash::check($oldPwd, $this->_user->password)) {
             return back()->with('errors', new MessageBag(['old_password' => '原密码错误']));
         }
 
-        $this->user->password = bcrypt($request->input('password'));
+        $this->_user->password = bcrypt($request->input('password'));
 
-        if ($this->user->save()) {
+        if ($this->_user->save()) {
             return redirect('/auth/logout');
         }
 

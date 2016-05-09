@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    private $_user;
+
     public function __construct()
     {
-        $this->user = Auth::user();
+        $this->_user = Auth::user();
     }
 
     /**
@@ -130,10 +132,10 @@ class UserController extends Controller
     public function postEdit(Requests\UserEditRequest $request)
     {
         $inputs = $request->only(['cellphone', 'email']);
-        $inputs['cellphone'] && $this->user->cellphone = $inputs['cellphone'];
-        $inputs['email'] && $this->user->email = $inputs['email'];
+        $inputs['cellphone'] && $this->_user->cellphone = $inputs['cellphone'];
+        $inputs['email'] && $this->_user->email = $inputs['email'];
 
-        if ($this->user->save()) {
+        if ($this->_user->save()) {
             return redirect('/user/profile');
         }
 

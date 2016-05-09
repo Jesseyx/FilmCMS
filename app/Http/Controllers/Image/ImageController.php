@@ -28,7 +28,7 @@ class ImageController extends Controller
 
     private $type;
     private $config;
-    private $user;
+    private $_user;
     private $status;
 
     protected static $messages = [
@@ -50,7 +50,7 @@ class ImageController extends Controller
 
     public function __construct(Request $request)
     {
-        $this->user = Auth::user();
+        $this->_user = Auth::user();
 
         $this->type = $request->input('type');
     }
@@ -83,7 +83,7 @@ class ImageController extends Controller
             $uploadFile->ext = $file->getClientOriginalExtension();
             $uploadFile->real_ext = $file->getClientOriginalExtension();
             $uploadFile->file_size = $file->getClientSize();
-            $uploadFile->uploader = $this->user->id;
+            $uploadFile->uploader = $this->_user->id;
 
             if ($file->move($absPath, $name . '.' .$uploadFile->ext)) {
                 if ($uploadFile->save()) {
