@@ -133,7 +133,7 @@
             </form>
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
+            <ul id="sidebarMenu" class="sidebar-menu">
                 <!-- <li class="header">所有模块</li>
                 <li class="treeview">
                     <a href="#">
