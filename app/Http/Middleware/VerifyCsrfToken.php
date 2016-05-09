@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        // 图片上传可以取消 CSRF 验证
+        '/image/*'
     ];
 }
