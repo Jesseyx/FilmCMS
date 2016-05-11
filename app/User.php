@@ -59,4 +59,48 @@ class User extends Authenticatable
         // 集合 unique 返回唯一数据项
         return $permissions->unique('id')->all();
     }
+
+    public function hasPermission($controller, $action)
+    {
+        $supers = config('admin.backend.authority.supers');
+
+        // 超级管理员
+        if (in_array($this->username, $supers)) {
+            return true;
+        }
+
+        if (empty($controller) && empty($action)) {
+            return false;
+        }
+
+        // 所有用户有权修改自身信息
+        $ignores = config('admin.backend.authority.ignores');
+        foreach ($ignores as $ignore) {
+            $items = explode('|', $ignore['location']);
+            foreach ($items as $item) {
+                $subItem = explode('@', $item);
+                $iController = isset($subItem[0]) ? $subItem[0] : null;
+                $iAction = isset($subItem[1]) ? $subItem[1] : null;
+                if (!($iController && $iAction)) {
+                    continue;
+                }
+                if ($controller === $iController && ($action === $iAction || $action === '*')) {
+                    return true;
+                }
+            }
+        }
+
+        $permissions = $this->permissions();
+        $formattedPermissions = [];
+        foreach ($permissions as $permission) {
+            $formatedPermission = $permission->format();
+            $formattedPermissions = array_merge_recursive($formattedPermissions, $formatedPermission);
+        }
+
+        if (!isset($formattedPermissions[$controller])) {
+            return false;
+        }
+
+        return $formattedPermissions[$controller] === '*' || (isset($formattedPermissions[$controller][$action]) && !!$formattedPermissions[$controller][$action]);
+    }
 }

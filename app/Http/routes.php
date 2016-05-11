@@ -20,27 +20,29 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::group(['namespace' => 'Home', 'as' => 'home::'], function () {
-        Route::get('/', 'HomeController@index');
-    });
-
-    // user
-    Route::group(['namespace' => 'User', 'as' => 'user::'], function () {
-        Route::group(['prefix' => 'user'], function () {
-            Route::get('profile', 'UserController@getProfile');
-            Route::get('edit', 'UserController@getEdit');
-            Route::post('edit', 'UserController@postEdit');
-            Route::post('ajax-edit', 'UserController@ajaxEdit');
+    // 访问权限控制
+    Route::group(['middleware' => 'permission'], function () {
+        Route::group(['namespace' => 'Home', 'as' => 'home::'], function () {
+            Route::get('/', 'HomeController@index');
         });
 
-        Route::resource('user', 'UserController');
-    });
+        // user
+        Route::group(['namespace' => 'User', 'as' => 'user::'], function () {
+            Route::group(['prefix' => 'user'], function () {
+                Route::get('profile', 'UserController@getProfile');
+                Route::get('edit', 'UserController@getEdit');
+                Route::post('edit', 'UserController@postEdit');
+                Route::post('ajax-edit', 'UserController@ajaxEdit');
+            });
 
+            Route::resource('user', 'UserController');
+        });
 
-    // password
-    Route::group(['namespace' => 'Password'], function () {
-        // 参考 image 的解释
-        Route::controller('password', 'PasswordController');
+        // password
+        Route::group(['namespace' => 'Password'], function () {
+            // 参考 image 的解释
+            Route::controller('password', 'PasswordController');
+        });
     });
 
     // image

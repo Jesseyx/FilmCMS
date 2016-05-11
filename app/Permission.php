@@ -19,4 +19,27 @@ class Permission extends Model
     {
         return $query->where('status', self::STATUS_ENABLE);
     }
+
+    public function format()
+    {
+        $items = explode('|', $this->location);
+        $formattedItems = [];
+
+        foreach ($items as $item) {
+            $subItem = explode('@', $item);
+            $controller = isset($subItem[0]) ? $subItem[0] : null;
+            $actions = isset($subItem[1]) ? $subItem[1] : null;
+
+            if (!($controller && $actions)) {
+                continue;
+            }
+            
+            $actions = explode(',', $actions);
+            foreach ($actions as $action) {
+                $formattedItems[$controller][$action] = true;
+            }
+        }
+
+        return $formattedItems;
+    }
 }
