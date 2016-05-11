@@ -7,7 +7,7 @@ const propTypes = {
     dataUrl: PropTypes.string.isRequired
 }
 
-class UserListBox extends Component {
+class RoleListBox extends Component {
     constructor(props) {
         super(props);
 
@@ -44,6 +44,7 @@ class UserListBox extends Component {
     }
 }
 
-UserListBox.propTypes = propTypes;
+RoleListBox.propTypes = propTypes;
 
-export default UserListBox;
+export default RoleListBox;
+

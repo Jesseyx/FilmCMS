@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
     icon: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.any.isRequired,
     field: PropTypes.string.isRequired,
     onAsc: PropTypes.func.isRequired,
     onDesc: PropTypes.func.isRequired,

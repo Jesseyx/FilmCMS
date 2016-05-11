@@ -6,7 +6,7 @@ const propTypes = {
     action: PropTypes.string.isRequired,
     method: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.any,
     data: PropTypes.object.isRequired,
 }
 

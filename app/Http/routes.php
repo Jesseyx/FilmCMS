@@ -38,6 +38,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::resource('user', 'UserController');
         });
 
+        // role
+        Route::group(['namespace' => 'Role', 'as' => 'role::'], function () {
+            Route::resource('role', 'RoleController');
+        });
+
         // password
         Route::group(['namespace' => 'Password'], function () {
             // 参考 image 的解释
@@ -54,4 +59,5 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['namespace' => 'Api', 'as' => 'api::', 'prefix' => 'api'], function () {
     Route::get('user', 'UserController@index');
+    Route::get('role', 'RoleController@index');
 });

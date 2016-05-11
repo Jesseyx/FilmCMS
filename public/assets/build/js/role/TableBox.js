@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import CommonTh from '../components/CommonTh';
 import IconTh from '../components/IconTh';
 import SortTh from '../components/SortTh';
-import UserRow from './UserRow';
+import RoleRow from './RoleRow';
 
 const propTypes = {
     data: PropTypes.array.isRequired,
@@ -30,7 +30,7 @@ class TableBox extends Component {
         if (!data.length) return null;
         const rows = data.map(item => {
             return (
-                <UserRow data={ item } key={ item.id } />
+                <RoleRow data={ item } key={ item.id } />
             )
         });
 
@@ -43,14 +43,11 @@ class TableBox extends Component {
                 <thead>
                     <tr>
                         <CommonTh value="#id" />
-                        <IconTh icon="user" value="姓名" />
-                        <IconTh icon="image" value="头像" />
-                        <IconTh icon="user" value="账号" />
-                        <IconTh icon="mobile" value="手机" />
-                        <IconTh icon="envelope" value="邮箱" />
-                        <SortTh icon="edit" value="最近登录时间" field="last_login_at" onAsc={ this.onAsc } onDesc={ this.onDesc } />
-                        <SortTh icon="edit" value="注册时间" field="created_at" onAsc={ this.onAsc } onDesc={ this.onDesc } />
-                        <CommonTh value="最近登录IP" />
+                        <IconTh icon="life-saver" value="名称" />
+                        <IconTh icon="won" value="描述" />
+                        <SortTh icon="edit" value="排序" field="order" onAsc={ this.onAsc } onDesc={ this.onDesc } />
+                        <SortTh icon="edit" value="创建时间" field="created_at" onAsc={ this.onAsc } onDesc={ this.onDesc } />
+                        <SortTh icon="edit" value="修改时间" field="updated_at" onAsc={ this.onAsc } onDesc={ this.onDesc } />
                         <CommonTh value="操作" />
                     </tr>
                 </thead>
