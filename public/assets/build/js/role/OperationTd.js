@@ -39,7 +39,7 @@ class OperationTd extends Component {
             element = <AjaxAnchor
                 { ...props }
                 className="btn btn-default"
-                data={{ id: data.id, status: 1}}
+                data={{ id: data.id, status: 1 }}
                 onSuccess={ this.handleSuccess }
                 onError={ this.handleError }
             >
