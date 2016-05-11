@@ -78,7 +78,7 @@
             <div class="form-group">
                 {{ Form::label('password', '密码：', ['class' => 'col-sm-2 control-label']) }}
                 <div class="col-sm-10 col-md-3">
-                    {{ Form::password('password', '', ['class' => 'form-control', 'placeholder' => '请输入密码']) }}
+                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => '请输入密码']) }}
                 </div>
             </div>
 
