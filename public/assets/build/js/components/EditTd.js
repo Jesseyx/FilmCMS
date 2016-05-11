@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
-    className: PropTypes.string,
     name: PropTypes.string.isRequired,
     action: PropTypes.string.isRequired,
     method: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.any,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
     data: PropTypes.object.isRequired,
 }
 
@@ -87,6 +89,7 @@ class EditTd extends Component {
 
         return (
             <td
+                className="pointer"
                 { ...props }
                 onDoubleClick={ this.handleDoubleClick }
             >

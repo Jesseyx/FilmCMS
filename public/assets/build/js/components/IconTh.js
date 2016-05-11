@@ -2,7 +2,10 @@ import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
     icon: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]).isRequired,
 }
 
 class IconTh extends Component {

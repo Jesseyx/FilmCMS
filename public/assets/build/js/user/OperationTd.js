@@ -27,7 +27,8 @@ class OperationTd extends Component {
         if (isVisible > 0) {;
             element = <AjaxAnchor
                 { ...props }
-                data={{ id: data.id, status: -1}}
+                className="btn btn-default"
+                data={{ id: data.id, status: -1 }}
                 onSuccess={ this.handleSuccess }
                 onError={ this.handleError }
             >
@@ -37,7 +38,8 @@ class OperationTd extends Component {
         } else {
             element = <AjaxAnchor
                 { ...props }
-                data={{ id: data.id, status: 1}}
+                className="btn btn-default"
+                data={{ id: data.id, status: 1 }}
                 onSuccess={ this.handleSuccess }
                 onError={ this.handleError }
             >

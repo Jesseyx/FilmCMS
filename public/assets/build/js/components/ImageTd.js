@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
-    className: PropTypes.string,
     value: PropTypes.string.isRequired,
     preview: PropTypes.string,
 }
@@ -27,6 +26,7 @@ class ImageTd extends Component {
         let element;
         if (preview) {
             element = <img
+                className="pointer"
                 { ...props }
                 src={ value }
                 onClick={ this.handleClick }

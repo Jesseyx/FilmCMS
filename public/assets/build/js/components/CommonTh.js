@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
 }
 
 class CommonTh extends Component {

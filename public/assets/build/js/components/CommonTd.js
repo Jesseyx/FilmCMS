@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
-    value: PropTypes.any,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
 }
 
 class CommonTd extends Component {
