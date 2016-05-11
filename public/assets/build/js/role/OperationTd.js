@@ -68,7 +68,7 @@ class OperationTd extends Component {
             <td>
                 <a
                     className="btn btn-default"
-                    href={ '/user/' + data.id + '/edit' }
+                    href={ '/role/' + data.id + '/edit' }
                     target="_blank"
                     style={{ marginBottom: '10px' }}
                 >

@@ -1,5 +1,8 @@
 /* table-content */
 .table-content {
+  .table {
+    table-layout: fixed;
+  }
   .form-group {
     margin-top: 10px;
     margin-left: 15px;

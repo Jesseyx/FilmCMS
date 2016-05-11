@@ -40,6 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         // role
         Route::group(['namespace' => 'Role', 'as' => 'role::'], function () {
+            Route::group(['prefix' => 'role'], function () {
+                Route::post('ajax-edit', 'RoleController@ajaxEdit');
+            });
+
             Route::resource('role', 'RoleController');
         });
 
