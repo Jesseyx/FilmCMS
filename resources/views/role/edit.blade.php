@@ -23,7 +23,7 @@
 
         @include('errors.list')
 
-        {{ Form::model($role, ['method' => 'PUT', 'url' => url('role', $role->id), 'class' => 'form-horizontal']) }}
+        {{ Form::model($role, ['method' => 'PUT', 'url' => url('role', $role->id), 'id' => 'editForm', 'class' => 'form-horizontal']) }}
 
         <div class="form-group">
             {{ Form::label('name', '角色名称：', ['class' => 'col-sm-2 control-label']) }}
@@ -37,6 +37,7 @@
 
             <div class="col-sm-10 col-md-3">
                 <div id="permissionTree"></div>
+                {{ Form::hidden('perm_ids', null, ['id' => 'permIdsInput']) }}
             </div>
         </div>
 
@@ -56,7 +57,7 @@
         <div class="form-group">
             {{ Form::label('order', '排序：', ['class' => 'col-sm-2 control-label']) }}
             <div class="col-sm-10 col-md-3">
-                {{ Form::text('order', null, ['class' => 'form-control', 'placeholder' => '请输入排序值 (数值大的排在前面)']) }}
+                {{ Form::text('order', 0, ['class' => 'form-control', 'placeholder' => '请输入排序值 (数值大的排在前面)']) }}
             </div>
         </div>
 

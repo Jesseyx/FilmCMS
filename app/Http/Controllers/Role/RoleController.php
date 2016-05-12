@@ -76,9 +76,27 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\RoleStoreAndUpdate $request, $id)
     {
         //
+        $inputs = $request->only(['name', 'description', 'order', 'status', 'perm_ids']);
+
+        $role = Role::findOrFail($id);
+        $role->name = $inputs['name'];
+        $inputs['description'] && $role->description = $inputs['description'];
+        $role->order = $inputs['order'];
+        $role->status = $inputs['status'];
+
+        // 使用事务
+        // use, 一个新鲜的家伙...
+        // 众所周知, 闭包: 内部函数使用了外部函数中定义的变量.
+        DB::transaction(function () use ($role, $inputs) {
+            $role->save();
+            // 更新角色权限表，这里每次都更新，不知道影不影响性能
+            $role->permissions()->sync(empty($inputs['perm_ids']) ? explode(',', $inputs['perm_ids']) : []);
+        });
+
+        return back();
     }
 
     /**
@@ -98,14 +116,15 @@ class RoleController extends Controller
 
         $validator = Validator::make($inputs, [
             'id' => 'required',
-            'name' => 'unique:roles,name,' . $inputs['id'],
+            'name' => 'required|unique:roles,name,' . $inputs['id'],
             'order' => 'integer',
             'status' => 'integer',
         ], [
             'id.required' => 'id 不能为空',
+            'name.required' => '角色不能为空',
             'name.unique' => '角色已存在',
-            'order.integer' => '排序值不能为空',
-            'status.integer' => '状态不能为空',
+            'order.integer' => '排序值必须为数字',
+            'status.integer' => '状态必须为数字',
         ]);
 
         if ($validator->fails()) {
@@ -114,10 +133,10 @@ class RoleController extends Controller
         }
 
         $role = Role::findOrFail($inputs['id']);
-        $inputs['name'] && $role->name = $inputs['name'];
+        $role->name = $inputs['name'];
         $inputs['description'] && $role->description = $inputs['description'];
-        $inputs['order'] && $role->order = $inputs['order'];
-        $inputs['status'] && $role->status = $inputs['status'];
+        $role->order = $inputs['order'];
+        $role->status = $inputs['status'];
 
         // 使用事务
         // use, 一个新鲜的家伙...

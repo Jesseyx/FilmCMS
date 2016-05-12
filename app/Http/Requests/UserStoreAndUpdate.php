@@ -27,7 +27,7 @@ class UserStoreAndUpdate extends Request
         return [
             //
             // 这个地方绑定的路由的是 user/{ user }
-            'username' => 'required|min:6|unique:users,username,'.$this->route('user'),
+            'username' => 'required|min:6|unique:users,username,' . $this->route('user'),
             'name' => 'required',
             'avatar' => 'url',
             'roles' => 'required',
