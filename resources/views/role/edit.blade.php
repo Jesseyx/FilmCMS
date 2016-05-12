@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('header')
-    <link rel="stylesheet" href={{ cssAsset('vendor/Jcrop-v0.9.12/css/jquery.Jcrop.css') }}>
+    <link rel="stylesheet" href={{ cssAsset('node_modules/jstree/dist/themes/default/style.css') }}>
 @stop
 
 @section('content')
@@ -82,5 +82,6 @@
     <script>
         var G_ROLE_PERMISSIONS = {!! $role->permissions !!};
     </script>
+    <script src="{{ jsAsset('node_modules/jstree/dist/jstree.js') }}"></script>
     <script src="{{ jsAsset('dist/js/role_edit.bundle.js') }}"></script>
 @stop

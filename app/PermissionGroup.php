@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PermissionGrop extends Model
+class PermissionGroup extends Model
 {
     //
 }
