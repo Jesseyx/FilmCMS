@@ -13,6 +13,7 @@ module.exports = {
 
         // role
         role_index: ['./role/index'],
+        role_edit: ['./role/edit'],
     },
     output: {
         path: path.join(__dirname, 'dist', 'js'),
