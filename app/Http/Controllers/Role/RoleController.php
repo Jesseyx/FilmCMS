@@ -93,7 +93,7 @@ class RoleController extends Controller
         DB::transaction(function () use ($role, $inputs) {
             $role->save();
             // 更新角色权限表，这里每次都更新，不知道影不影响性能
-            $role->permissions()->sync(empty($inputs['perm_ids']) ? explode(',', $inputs['perm_ids']) : []);
+            $role->permissions()->sync(empty($inputs['perm_ids']) ? [] : explode(',', $inputs['perm_ids']));
         });
 
         return back();
