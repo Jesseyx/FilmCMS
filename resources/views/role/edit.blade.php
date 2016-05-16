@@ -14,7 +14,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-user-md"></i> 角色管理</a></li>
-            <li class="active">添加角色</li>
+            <li class="active">修改角色</li>
         </ol>
     </section>
 
@@ -57,7 +57,7 @@
         <div class="form-group">
             {{ Form::label('order', '排序：', ['class' => 'col-sm-2 control-label']) }}
             <div class="col-sm-10 col-md-3">
-                {{ Form::text('order', 0, ['class' => 'form-control', 'placeholder' => '请输入排序值 (数值大的排在前面)']) }}
+                {{ Form::text('order', null, ['class' => 'form-control', 'placeholder' => '请输入排序值 (数值大的排在前面)']) }}
             </div>
         </div>
 

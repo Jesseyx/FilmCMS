@@ -8,8 +8,9 @@
 })(jQuery, window);
 
 $(function () {
-    $(document).on('click', '.J-go-back', function () {
-        win.history.back();
+    $(document).on('click', '.J-go-back', function (e) {
+        e.preventDefault();
+        window.history.back();
     });
 
     (function () {

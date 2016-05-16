@@ -31,6 +31,7 @@ class RoleController extends Controller
     public function create()
     {
         //
+        return view('role.create');
     }
 
     /**
@@ -39,9 +40,27 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\RoleStoreAndUpdate $request)
     {
         //
+        $inputs = $request->only(['name', 'description', 'order', 'status', 'perm_ids']);
+
+        $role = new Role();
+        $role->name = $inputs['name'];
+        $inputs['description'] && $role->description = $inputs['description'];
+        $role->order = $inputs['order'];
+        $role->status = $inputs['status'];
+
+        // 使用事务
+        // use, 一个新鲜的家伙...
+        // 众所周知, 闭包: 内部函数使用了外部函数中定义的变量.
+        DB::transaction(function () use ($role, $inputs) {
+            $role->save();
+            // 要通过在连接模型的中间表中插入记录附加角色到用户上，可以使用attach方法
+            $role->permissions()->attach(empty($inputs['perm_ids']) ? [] : explode(',', $inputs['perm_ids']));
+        });
+
+        return back();
     }
 
     /**

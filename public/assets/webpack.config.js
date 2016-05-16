@@ -14,6 +14,7 @@ module.exports = {
         // role
         role_index: ['./role/index'],
         role_edit: ['./role/edit'],
+        role_create: ['./role/create'],
     },
     output: {
         path: path.join(__dirname, 'dist', 'js'),
