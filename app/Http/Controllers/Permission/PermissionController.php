@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Permission;
 
 use App\Permission;
+use App\PermissionGroup;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -30,6 +31,8 @@ class PermissionController extends Controller
     public function create()
     {
         //
+        $groups = PermissionGroup::enable()->get();
+        return view('permission.create', compact('groups'));
     }
 
     /**
