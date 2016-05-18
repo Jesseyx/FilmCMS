@@ -7,7 +7,7 @@ const propTypes = {
     data: PropTypes.object.isRequired,
 }
 
-class UserRow extends Component {
+class RoleRow extends Component {
     render() {
         const { data } = this.props;
         return (
@@ -24,6 +24,6 @@ class UserRow extends Component {
     }
 }
 
-UserRow.propTypes = propTypes;
+RoleRow.propTypes = propTypes;
 
-export default UserRow;
+export default RoleRow;
