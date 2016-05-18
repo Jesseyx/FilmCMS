@@ -94,7 +94,7 @@ class PermissionController extends Controller
 
         $validator = Validator::make($inputs, [
             'id' => 'required',
-            'name' => 'unique:permissions,name' . $inputs['id'],
+            'name' => 'unique:permissions,name,' . $inputs['id'],
             'order' => 'integer',
             'status' => 'integer',
         ], [
