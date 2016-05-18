@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['namespace' => 'Api', 'as' => 'api::', 'prefix' => 'api'], function () {
     Route::get('user', 'UserController@index');
     Route::get('role', 'RoleController@index');
+    Route::get('permission', 'PermissionController@index');
 
     Route::group(['prefix' => 'permission'], function () {
        Route::get('all-group', 'PermissionController@getAllGroup');
