@@ -77,12 +77,21 @@ class EditTd extends Component {
         let element;
 
         if (this.state.editing) {
-            element = <input
-                className="form-control"
-                defaultValue={ this.state.value }
-                onBlur={ this.handleSubmit }
-                ref="input"
-            />
+            if (type === 'area') {
+                element = <textarea
+                    className="form-control"
+                    defaultValue={ this.state.value }
+                    onBlur={ this.handleSubmit }
+                    ref="input"
+                />
+            } else {
+                element = <input
+                    className="form-control"
+                    defaultValue={ this.state.value }
+                    onBlur={ this.handleSubmit }
+                    ref="input"
+                />
+            }
         } else {
             element = <p>{ this.state.value }</p>;
         }
