@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Permission;
 
+use App\Permission;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class PermissionController extends Controller
 {
@@ -84,5 +86,42 @@ class PermissionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ajaxEdit(Request $request)
+    {
+        $inputs = $request->only(['id', 'name', 'location', 'description', 'order', 'status']);
+
+        $validator = Validator::make($inputs, [
+            'id' => 'required',
+            'name' => 'unique:permissions,name' . $inputs['id'],
+            'order' => 'integer',
+            'status' => 'integer',
+        ], [
+            'id.required' => '缺少id',
+            'name.unique' => '权限名称已存在',
+            'order.integer' => '排序值必须为整数',
+            'status.integer' => '请选择状态'
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->errors();
+
+            return response()->json(['status' => 400, 'msg' => $messages]);
+        }
+
+        $permission = Permission::findOrFail($inputs['id']);
+
+        $inputs['name'] && $permission->name = $inputs['name'];
+        $inputs['location'] && $permission->location = $inputs['location'];
+        $inputs['description'] && $permission->description = $inputs['description'];
+        $inputs['order'] && $permission->order = $inputs['order'];
+        $inputs['status'] && $permission->status = $inputs['status'];
+
+        if ($permission->save()) {
+            return response()->json(['status' => 200]);
+        }
+
+        return response()->json(['status' => 500, 'msg' => 'Inner error! Please try later!']);
     }
 }

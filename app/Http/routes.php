@@ -49,6 +49,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         // permission
         Route::group(['namespace' => 'Permission', 'as' => 'permission::'], function () {
+            Route::group(['prefix' => 'permission'], function () {
+                Route::post('ajax-edit', 'PermissionController@ajaxEdit');
+            });
+
             Route::resource('permission', 'PermissionController');
         });
 
