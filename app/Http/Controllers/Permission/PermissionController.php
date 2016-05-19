@@ -81,6 +81,10 @@ class PermissionController extends Controller
     public function edit($id)
     {
         //
+        $permission = Permission::findOrFail($id);
+        $groups = PermissionGroup::enable()->get();
+
+        return view('permission.edit', compact('permission', 'groups'));
     }
 
     /**
@@ -90,9 +94,24 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\PermissionStoreAndUpdate $request, $id)
     {
         //
+        $inputs = $request->only(['name', 'group_id', 'location', 'status', 'order', 'description']);
+
+        $permission = Permission::findOrFail($id);
+
+        $permission->name = $inputs['name'];
+        $permission->group_id = $inputs['group_id'];
+        $permission->location = $inputs['location'];
+        $permission->status = $inputs['status'];
+        $permission->order = $inputs['order'];
+        $permission->description = $inputs['description'];
+
+        if ($permission->save()) {
+            return redirect('permission');
+        }
+        return back()->withInput();
     }
 
     /**
