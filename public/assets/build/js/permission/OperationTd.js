@@ -69,7 +69,6 @@ class OperationTd extends Component {
                 <a
                     className="btn btn-default"
                     href={ '/permission/' + data.id + '/edit' }
-                    target="_blank"
                     style={{ marginBottom: '10px' }}
                 >
                     <i className="fa fa-edit"></i>
