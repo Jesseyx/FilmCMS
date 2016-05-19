@@ -41,9 +41,24 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\PermissionStoreAndUpdate $request)
     {
         //
+        $inputs = $request->only(['name', 'group_id', 'location', 'status', 'order', 'description']);
+
+        $permission = new Permission();
+
+        $permission->name = $inputs['name'];
+        $permission->group_id = $inputs['group_id'];
+        $permission->location = $inputs['location'];
+        $permission->status = $inputs['status'];
+        $permission->order = $inputs['order'];
+        $permission->description = $inputs['description'];
+
+        if ($permission->save()) {
+            return back();
+        }
+        return back()->withInput();
     }
 
     /**

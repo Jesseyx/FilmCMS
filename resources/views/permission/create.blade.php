@@ -31,7 +31,7 @@
         <div class="form-group">
             {{ Form::label('group_id', '所在分组：', ['class' => 'col-sm-2 control-label']) }}
             <div class="col-sm-10 col-md-3">
-                <select class="form-control" name="status">
+                <select id="group_id" class="form-control" name="group_id">
                     @foreach($groups as $group)
                         <option value={{ $group->id }}>
                             {{ $group->name }}
@@ -51,7 +51,7 @@
         <div class="form-group">
             {{ Form::label('status', '状态：', ['class' => 'col-sm-2 control-label']) }}
             <div class="col-sm-10 col-md-3">
-                <select class="form-control" name="status">
+                <select id="status" class="form-control" name="status">
                     @foreach(config('admin.permission.status') as $status)
                         <option value={{ $status['value'] }}>
                             {{ $status['name'] }}
