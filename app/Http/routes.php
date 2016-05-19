@@ -56,6 +56,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::resource('permission', 'PermissionController');
         });
 
+        // permission-group
+        Route::group(['namespace' => 'PermissionGroup', 'as' => 'permissionGroup::'], function () {
+            Route::resource('permission-group', 'PermissionGroupController');
+        });
+
         // password
         Route::group(['namespace' => 'Password'], function () {
             // 参考 image 的解释
