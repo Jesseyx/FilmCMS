@@ -17,7 +17,10 @@ module.exports = {
         role_create: ['./role/create'],
 
         // permission
-        permission_index: ['./permission/index']
+        permission_index: ['./permission/index'],
+
+        // permissionGroup
+        permissionGroup_index: ['./permissionGroup/index'],
     },
     output: {
         path: path.join(__dirname, 'dist', 'js'),
