@@ -17,6 +17,7 @@ class PermissionGroupController extends Controller
     public function index()
     {
         //
+        return view('permissionGroup.index');
     }
 
     /**

@@ -79,6 +79,7 @@ Route::group(['namespace' => 'Api', 'as' => 'api::', 'prefix' => 'api'], functio
     Route::get('user', 'UserController@index');
     Route::get('role', 'RoleController@index');
     Route::get('permission', 'PermissionController@index');
+    Route::get('permission-group', 'PermissionGroupController@index');
 
     Route::group(['prefix' => 'permission'], function () {
        Route::get('all-group', 'PermissionController@getAllGroup');
