@@ -19,7 +19,7 @@
 
     @include('errors.list')
 
-    {{ Form::model($group, ['method' => 'PUT', 'url' => url('permission-group', $permission->id), 'class' => 'form-horizontal']) }}
+    {{ Form::model($group, ['method' => 'PUT', 'url' => url('permission-group', $group->id), 'class' => 'form-horizontal']) }}
 
     <div class="form-group">
         {{ Form::label('name', '权限分组名称：', ['class' => 'col-sm-2 control-label']) }}
@@ -33,7 +33,7 @@
         <div class="col-sm-10 col-md-3">
             <select id="status" class="form-control" name="status">
                 @foreach(config('admin.permissionGroup.status') as $status)
-                <option value={{ $status['value'] }}{{ $status['value'] === $permission->status ? ' selected="selected"' : '' }}>
+                <option value={{ $status['value'] }}{{ $status['value'] === $group->status ? ' selected="selected"' : '' }}>
                 {{ $status['name'] }}
                 </option>
                 @endforeach

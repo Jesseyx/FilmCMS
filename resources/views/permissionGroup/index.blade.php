@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             <small></small>
-            <a class="btn btn-default" href="/permission/create">
+            <a class="btn btn-default" href="/permission-group/create">
                 <i class="fa fa-edit"></i> 添加
             </a>
         </h1>
