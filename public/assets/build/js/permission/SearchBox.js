@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import SearchHeader from '../components/SearchHeader';
+import Select from '../components/Select';
+import config from '../config/Permission';
 
 const propTypes = {
     query: PropTypes.string,
@@ -31,11 +33,7 @@ class SearchBox extends Component {
                     <form className="form-inline" ref="form">
                         <div className="form-group">
                             <label htmlFor="status">状态：</label>
-                            <select id="status" className="form-control" name="status">
-                                <option value="">全部</option>
-                                <option value="1">已启用</option>
-                                <option value="-1">已禁用</option>
-                            </select>
+                            <Select id="status" className="form-control" name="status" data={ config.status } />
                         </div>
                         <div className="form-group">
                             <label htmlFor="name">名称：</label>
