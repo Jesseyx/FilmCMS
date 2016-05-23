@@ -85,8 +85,3 @@
 
     </section><!-- /.content -->
 @stop
-
-@section('footer')
-    <script src="{{ jsAsset('node_modules/jstree/dist/jstree.js') }}"></script>
-    <script src="{{ jsAsset('dist/js/role_create.bundle.js') }}"></script>
-@stop

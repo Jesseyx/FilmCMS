@@ -24,7 +24,7 @@
         <div class="form-group">
             {{ Form::label('name', '权限名称：', ['class' => 'col-sm-2 control-label']) }}
             <div class="col-sm-10 col-md-3">
-                {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => '请输入角色名称']) }}
+                {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => '请输入权限名称']) }}
             </div>
         </div>
 
@@ -84,9 +84,4 @@
                 <!-- Your Page Content Here -->
 
     </section><!-- /.content -->
-@stop
-
-@section('footer')
-    <script src="{{ jsAsset('node_modules/jstree/dist/jstree.js') }}"></script>
-    <script src="{{ jsAsset('dist/js/role_create.bundle.js') }}"></script>
 @stop
