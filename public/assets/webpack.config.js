@@ -6,6 +6,8 @@ module.exports = {
     // 根目录
     context: path.join(__dirname, 'build', 'js'),
     entry: {
+        vendor: ['jquery'],
+
         // user
         user_index: ['./user/index'],
         user_edit: ['./user/edit'],
