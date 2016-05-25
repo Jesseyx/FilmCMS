@@ -2,12 +2,15 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    devtool: 'source-map',
+    devtool: 'cheap-source-map',
     // 根目录
-    context: path.join(__dirname, 'build', 'js'),
+    context: path.join(__dirname, 'src', 'js'),
     entry: {
-        vendor: ['jquery'],
-
+        // 库
+        vendor: ['./vendor'],
+        // IE fix
+        ieShim: ['./ieShim'],
+        
         // user
         user_index: ['./user/index'],
         user_edit: ['./user/edit'],
@@ -37,9 +40,15 @@ module.exports = {
             }
         ]
     },
-    resolve: {
-        alias: {
-            'jquery': path.join('jquery', 'dist', 'jquery'),
-        }
-    }
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.js',
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+        })
+    ]
 }
