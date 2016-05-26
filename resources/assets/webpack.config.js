@@ -28,7 +28,8 @@ module.exports = {
         permissionGroup_index: ['./permissionGroup/index'],
     },
     output: {
-        path: path.join(__dirname, 'dist', 'js'),
+        // path: path.join(__dirname, 'dist', 'js'),
+        path: path.join(__dirname, '..', '..', 'public', 'assets', 'js'),
         filename: '[name].bundle.js',
     },
     module: {
@@ -37,8 +38,26 @@ module.exports = {
                 test: /\.js$/,
                 loaders: ['babel'],
                 exclude: /node_modules/,
+            },
+
+            {
+                test: /\.css$/,
+                loaders: ['style', 'css'],
+            },
+
+            {
+                test: /\.(jpg|png|gif)$/,
+                loader: 'url?limit=10000',
             }
         ]
+    },
+    resolve: {
+        // 猜测文件的后戳
+        extensions: ['', '.js', '.css'],
+        alias: {
+            // 配置别名，不然上传插件找不到
+            'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget'
+        }
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
@@ -50,5 +69,5 @@ module.exports = {
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
         })
-    ]
+    ],
 }

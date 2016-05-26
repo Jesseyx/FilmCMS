@@ -1,9 +1,5 @@
 @extends('layout.index')
 
-@section('header')
-    <link rel="stylesheet" href={{ cssAsset('vendor/Jcrop-v0.9.12/css/jquery.Jcrop.css') }}>
-@stop
-
 @section('content')
     <section class="content-header">
         <h1>
@@ -96,8 +92,5 @@
 @stop
 
 @section('footer')
-    <script src="{{ jsAsset('node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}"></script>
-    <script src="{{ jsAsset('node_modules/blueimp-file-upload/js/jquery.fileupload.js') }}"></script>
-    <script src="{{ jsAsset('vendor/Jcrop-v0.9.12/js/jquery.Jcrop.js') }}"></script>
-    <script src="{{ jsAsset('dist/js/user_edit.bundle.js') }}"></script>
+    <script src="{{ jsAsset('js/user_edit.bundle.js') }}"></script>
 @stop

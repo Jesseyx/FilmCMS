@@ -1,9 +1,5 @@
 @extends('layout.index')
 
-@section('header')
-    <link rel="stylesheet" href={{ cssAsset('node_modules/jstree/dist/themes/default/style.css') }}>
-@stop
-
 @section('content')
     <section class="content-header">
         <h1>
@@ -83,6 +79,5 @@
     <script>
         var G_ROLE_PERMISSIONS = {!! $role->permissions !!};
     </script>
-    <script src="{{ jsAsset('node_modules/jstree/dist/jstree.js') }}"></script>
-    <script src="{{ jsAsset('dist/js/role_edit.bundle.js') }}"></script>
+    <script src="{{ jsAsset('js/role_edit.bundle.js') }}"></script>
 @stop

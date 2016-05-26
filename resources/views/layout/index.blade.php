@@ -8,26 +8,28 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href={{ cssAsset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}>
+    {{--<link rel="stylesheet" href={{ cssAsset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}>--}}
     <!-- Font Awesome -->
-    <link rel="stylesheet" href={{ cssAsset('build/css/font-awesome.min.css') }}>
+    {{--<link rel="stylesheet" href={{ cssAsset('build/css/font-awesome.min.css') }}>--}}
     <!-- Ionicons -->
-    <link rel="stylesheet" href={{ cssAsset('build/css/ionicons.min.css') }}>
+    {{--<link rel="stylesheet" href={{ cssAsset('build/css/ionicons.min.css') }}>--}}
     <!-- Theme style -->
-    <link rel="stylesheet" href={{ cssAsset('node_modules/admin-lte/dist/css/AdminLTE.min.css') }}>
+    {{--<link rel="stylesheet" href={{ cssAsset('node_modules/admin-lte/dist/css/AdminLTE.min.css') }}>--}}
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href={{ cssAsset('node_modules/admin-lte/dist/css/skins/skin-blue.min.css') }}>
+    {{--<link rel="stylesheet" href={{ cssAsset('node_modules/admin-lte/dist/css/skins/skin-blue.min.css') }}>--}}
     <!-- Self style -->
-    <link rel="stylesheet" href={{ cssAsset('dist/css/main.css') }}>
+    {{--<link rel="stylesheet" href={{ cssAsset('dist/css/main.css') }}>--}}
+
+    <link rel="stylesheet" href={{ cssAsset('css/vendor.css') }}>
+    <link rel="stylesheet" href={{ cssAsset('css/main.min.css') }}>
 
     @yield('header')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src={{ jsAsset('js/ieShim.bundle.js') }}></script>
     <![endif]-->
 </head>
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
@@ -349,17 +351,18 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.0 -->
-<script src={{ jsAsset('node_modules/admin-lte/plugins/jQuery/jQuery-2.2.0.min.js') }}></script>
+{{--<script src={{ jsAsset('node_modules/admin-lte/plugins/jQuery/jQuery-2.2.0.min.js') }}></script>--}}
 <!-- Bootstrap 3.3.6 -->
-<script src={{ jsAsset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}></script>
+{{--<script src={{ jsAsset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}></script>--}}
 <!-- SlimScroll -->
-<script src={{ jsAsset('node_modules/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js') }}></script>
+{{--<script src={{ jsAsset('node_modules/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js') }}></script>--}}
 <!-- FastClick -->
-<script src={{ jsAsset('node_modules/admin-lte/plugins/fastclick/fastclick.js') }}></script>
+{{--<script src={{ jsAsset('node_modules/admin-lte/plugins/fastclick/fastclick.js') }}></script>--}}
 <!-- AdminLTE App -->
-<script src={{ jsAsset('node_modules/admin-lte/dist/js/app.min.js') }}></script>
+{{--<script src={{ jsAsset('node_modules/admin-lte/dist/js/app.min.js') }}></script>--}}
 <!-- patchFix -->
-<script src={{ jsAsset('build/js/patchFix.js') }}></script>
+{{--<script src={{ jsAsset('build/js/patchFix.js') }}></script>--}}
+<script src={{ jsAsset('js/vendor.js') }}></script>
 
 @yield('footer')
 </body>

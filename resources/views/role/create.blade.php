@@ -1,9 +1,5 @@
 @extends('layout.index')
 
-@section('header')
-    <link rel="stylesheet" href={{ cssAsset('node_modules/jstree/dist/themes/default/style.css') }}>
-@stop
-
 @section('content')
     <section class="content-header">
         <h1>
@@ -80,6 +76,5 @@
 @stop
 
 @section('footer')
-    <script src="{{ jsAsset('node_modules/jstree/dist/jstree.js') }}"></script>
-    <script src="{{ jsAsset('dist/js/role_create.bundle.js') }}"></script>
+    <script src="{{ jsAsset('js/role_create.bundle.js') }}"></script>
 @stop
