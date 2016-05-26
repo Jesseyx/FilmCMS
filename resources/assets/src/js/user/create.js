@@ -1,3 +1,7 @@
+import 'blueimp-file-upload';
+import '../../../vendor/Jcrop-v0.9.12/js/jquery.Jcrop';
+import '../../../vendor/Jcrop-v0.9.12/css/jquery.Jcrop';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CropImage from '../components/crop';
