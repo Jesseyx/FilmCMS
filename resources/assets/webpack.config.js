@@ -28,8 +28,8 @@ module.exports = {
         permissionGroup_index: ['./permissionGroup/index'],
     },
     output: {
-        // path: path.join(__dirname, 'dist', 'js'),
-        path: path.join(__dirname, '..', '..', 'public', 'assets', 'js'),
+        path: path.join(__dirname, 'dist', 'js'),
+        // path: path.join(__dirname, '..', '..', 'public', 'assets', 'js'),
         filename: '[name].bundle.js',
     },
     module: {
