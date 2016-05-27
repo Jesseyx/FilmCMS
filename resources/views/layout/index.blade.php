@@ -120,7 +120,7 @@
                 <div class="pull-left info">
                     <p>{{ $_user->name }}</p>
                     {{--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>--}}
-                    <a href="#" style="display: inline-block; max-width: 140px; text-overflow: ellipsis; overflow: hidden;"><i class="fa fa-circle text-success"></i> 超级管理员</a>
+                    <a href="/user/profile" style="display: inline-block; max-width: 140px; text-overflow: ellipsis; overflow: hidden;"><i class="fa fa-circle text-success"></i> 超级管理员</a>
                 </div>
             </div>
             <!-- search form -->
