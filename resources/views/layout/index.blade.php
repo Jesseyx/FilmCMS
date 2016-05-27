@@ -21,15 +21,15 @@
     <!-- Self style -->
     {{--<link rel="stylesheet" href={{ cssAsset('dist/css/main.css') }}>--}}
 
-    <link rel="stylesheet" href={{ cssAsset('css/vendor.css') }}>
-    <link rel="stylesheet" href={{ cssAsset('css/main.min.css') }}>
+    <link rel="stylesheet" href={{ cssAsset('/css/vendor.css') }}>
+    <link rel="stylesheet" href={{ cssAsset('/css/main.min.css') }}>
 
     @yield('header')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src={{ jsAsset('js/ieShim.bundle.js') }}></script>
+    <script src={{ jsAsset('/js/ieShim.bundle.js') }}></script>
     <![endif]-->
 </head>
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
@@ -362,7 +362,7 @@
 {{--<script src={{ jsAsset('node_modules/admin-lte/dist/js/app.min.js') }}></script>--}}
 <!-- patchFix -->
 {{--<script src={{ jsAsset('build/js/patchFix.js') }}></script>--}}
-<script src={{ jsAsset('js/vendor.js') }}></script>
+<script src={{ jsAsset('/js/vendor.js') }}></script>
 
 @yield('footer')
 </body>

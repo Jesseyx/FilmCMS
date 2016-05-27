@@ -27,5 +27,5 @@
 @stop
 
 @section('footer')
-    <script src="{{ jsAsset('dist/js/role_index.bundle.js') }}"></script>
+    <script src="{{ jsAsset('/js/role_index.bundle.js') }}"></script>
 @stop

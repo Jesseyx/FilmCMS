@@ -79,5 +79,5 @@
     <script>
         var G_ROLE_PERMISSIONS = {!! $role->permissions !!};
     </script>
-    <script src="{{ jsAsset('js/role_edit.bundle.js') }}"></script>
+    <script src="{{ jsAsset('/js/role_edit.bundle.js') }}"></script>
 @stop

@@ -76,5 +76,5 @@
 @stop
 
 @section('footer')
-    <script src="{{ jsAsset('js/role_create.bundle.js') }}"></script>
+    <script src="{{ jsAsset('/js/role_create.bundle.js') }}"></script>
 @stop

@@ -92,5 +92,5 @@
 @stop
 
 @section('footer')
-    <script src="{{ jsAsset('js/user_create.bundle.js') }}"></script>
+    <script src="{{ jsAsset('/js/user_create.bundle.js') }}"></script>
 @stop

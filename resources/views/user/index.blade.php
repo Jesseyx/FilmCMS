@@ -27,5 +27,5 @@
 @stop
 
 @section('footer')
-    <script src="{{ jsAsset('dist/js/user_index.bundle.js') }}"></script>
+    <script src="{{ jsAsset('/js/user_index.bundle.js') }}"></script>
 @stop

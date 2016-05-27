@@ -27,5 +27,5 @@
 @stop
 
 @section('footer')
-    <script src="{{ jsAsset('dist/js/permissionGroup_index.bundle.js') }}"></script>
+    <script src="{{ jsAsset('/js/permissionGroup_index.bundle.js') }}"></script>
 @stop
