@@ -10,6 +10,9 @@ module.exports = {
         vendor: ['./vendor'],
         // IE fix
         ieShim: ['./ieShim'],
+
+        // login 单独打包，不引入 vendor
+        login: ['./login'],
         
         // user
         user_index: ['./user/index'],
