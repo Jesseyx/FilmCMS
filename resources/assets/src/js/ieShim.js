@@ -1,2 +1,2 @@
-import '../../vendor/html5shiv.min';
-import '../../vendor/respond.min';
+import '../vendor/js/html5shiv.min';
+import '../vendor/js/respond.min';
