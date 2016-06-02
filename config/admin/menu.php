@@ -28,8 +28,8 @@ return [
         'text' => '轮播图管理',
         'icon' => 'fa-file-image-o',
         'children' => [
-            'list' => ['text' => '轮播图列表', 'href' => '#'],
-            'create' => ['text' => '添加轮播图', 'href' => '#'],
+            'list' => ['text' => '轮播图列表', 'href' => '/banner'],
+            'create' => ['text' => '添加轮播图', 'href' => '/banner/create'],
         ]
     ],
     'column' => [
