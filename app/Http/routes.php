@@ -70,6 +70,18 @@ Route::group(['middleware' => 'auth'], function () {
             // 参考 image 的解释
             Route::controller('password', 'PasswordController');
         });
+
+        // api
+        Route::group(['namespace' => 'Api', 'as' => 'api::', 'prefix' => 'api'], function () {
+            Route::get('user', 'UserController@index');
+            Route::get('role', 'RoleController@index');
+            Route::get('permission', 'PermissionController@index');
+            Route::get('permission-group', 'PermissionGroupController@index');
+
+            Route::group(['prefix' => 'permission'], function () {
+                Route::get('all-group', 'PermissionController@getAllGroup');
+            });
+        });
     });
 
     // image
@@ -79,13 +91,3 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
-Route::group(['namespace' => 'Api', 'as' => 'api::', 'prefix' => 'api'], function () {
-    Route::get('user', 'UserController@index');
-    Route::get('role', 'RoleController@index');
-    Route::get('permission', 'PermissionController@index');
-    Route::get('permission-group', 'PermissionGroupController@index');
-
-    Route::group(['prefix' => 'permission'], function () {
-       Route::get('all-group', 'PermissionController@getAllGroup');
-    });
-});
