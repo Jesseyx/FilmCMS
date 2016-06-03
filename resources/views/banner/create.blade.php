@@ -134,3 +134,7 @@
 
     </section><!-- /.content -->
 @stop
+
+@section('footer')
+    <script src=""></script>
+@stop
