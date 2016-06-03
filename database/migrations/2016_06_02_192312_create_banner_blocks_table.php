@@ -30,7 +30,7 @@ class CreateBannerBlocksTable extends Migration
             // 上下架时间
             $table->timestamp('up_time');
             $table->timestamp('down_time');
-            // 资源 id
+            // 电影或游戏的 id
             $table->integer('source_id')->default(0);
             // 资源类型
             $table->tinyInteger('resource_type');

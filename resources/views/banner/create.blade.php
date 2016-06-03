@@ -33,59 +33,96 @@
             </div>
         </div>
 
-        {{--<div class="form-group">--}}
-            {{--{{ Form::label('name', '权限名称：', ['class' => 'col-sm-2 control-label']) }}--}}
-            {{--<div class="col-sm-10 col-md-3">--}}
-                {{--{{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => '请输入权限名称']) }}--}}
-            {{--</div>--}}
-        {{--</div>--}}
+        <div class="form-group">
+            {{ Form::label('resource_type', '资源类型：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3">
+                <select id="resource_type" class="form-control" name="resource_type">
+                    @foreach(config('admin.banner.resource_types') as $type)
+                        <option value={{ $type['value'] }}>
+                            {{ $type['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
-        {{--<div class="form-group">--}}
-            {{--{{ Form::label('group_id', '所在分组：', ['class' => 'col-sm-2 control-label']) }}--}}
-            {{--<div class="col-sm-10 col-md-3">--}}
-                {{--<select id="group_id" class="form-control" name="group_id">--}}
-                    {{--@foreach($groups as $group)--}}
-                        {{--<option value={{ $group->id }}>--}}
-                            {{--{{ $group->name }}--}}
-                        {{--</option>--}}
-                    {{--@endforeach--}}
-                {{--</select>--}}
-            {{--</div>--}}
-        {{--</div>--}}
+        <div class="form-group">
+            {{ Form::label('source_id', 'id：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3">
+                {{ Form::text('source_id', null, ['class' => 'form-control', 'placeholder' => '请输入电影或游戏的id']) }}
+                <button id="btnGetSourceId" class="btn btn-default" type="button" style="margin-top: 5px;">
+                    确定
+                </button>
+            </div>
+        </div>
 
-        {{--<div class="form-group">--}}
-            {{--{{ Form::label('location', '允许访问的方法：', ['class' => 'col-sm-2 control-label']) }}--}}
-            {{--<div class="col-sm-10 col-md-3">--}}
-                {{--{{ Form::textarea('location', null, ['class' => 'form-control', 'placeholder' => '同一控制器名可以写一个，方法用逗号隔开', 'rows' => null, 'cols' => null]) }}--}}
-            {{--</div>--}}
-        {{--</div>--}}
+        <div class="form-group">
+            {{ Form::label('title', '标题：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3">
+                {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => '请输入标题']) }}
+            </div>
+        </div>
 
-        {{--<div class="form-group">--}}
-            {{--{{ Form::label('status', '状态：', ['class' => 'col-sm-2 control-label']) }}--}}
-            {{--<div class="col-sm-10 col-md-3">--}}
-                {{--<select id="status" class="form-control" name="status">--}}
-                    {{--@foreach(config('admin.permission.status') as $status)--}}
-                        {{--<option value={{ $status['value'] }}>--}}
-                            {{--{{ $status['name'] }}--}}
-                        {{--</option>--}}
-                    {{--@endforeach--}}
-                {{--</select>--}}
-            {{--</div>--}}
-        {{--</div>--}}
+        <div class="form-group">
+            {{ Form::label('sub_title', '副标题：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3">
+                {{ Form::text('sub_title', null, ['class' => 'form-control', 'placeholder' => '请输入副标题']) }}
+            </div>
+        </div>
 
-        {{--<div class="form-group">--}}
-            {{--{{ Form::label('order', '排序：', ['class' => 'col-sm-2 control-label']) }}--}}
-            {{--<div class="col-sm-10 col-md-3">--}}
-                {{--{{ Form::text('order', null, ['class' => 'form-control', 'placeholder' => '请输入排序值 (数值大的排在前面)']) }}--}}
-            {{--</div>--}}
-        {{--</div>--}}
+        <div class="form-group">
+            {{ Form::label('platform', '平台：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3">
+                <select id="platform" class="form-control" name="platform">
+                    @foreach(config('admin.backend.platforms') as $platform)
+                        <option value={{ $platform['value'] }}>
+                            {{ $platform['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
-        {{--<div class="form-group">--}}
-            {{--{{ Form::label('description', '描述：', ['class' => 'col-sm-2 control-label']) }}--}}
-            {{--<div class="col-sm-10 col-md-3">--}}
-                {{--{{ Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => '请输入描述', 'rows' => null, 'cols' => null]) }}--}}
-            {{--</div>--}}
-        {{--</div>--}}
+        <div class="form-group">
+            {{ Form::label('status', '状态：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3">
+                <select id="status" class="form-control" name="status">
+                    @foreach(config('admin.banner.status') as $status)
+                        <option value={{ $status['value'] }}>
+                            {{ $status['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('order', '排序：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3">
+                {{ Form::text('order', null, ['class' => 'form-control', 'placeholder' => '请输入排序值，数值越大，越靠前']) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('is_ad', '是否广告：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3" style="margin-top: 8px;">
+                {{ Form::checkbox('is_ad') }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('link_path', '跳转 URL：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3">
+                {{ Form::text('link_path', null, ['class' => 'form-control', 'placeholder' => '请输入要跳转的 URL']) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('description', '描述：', ['class' => 'col-sm-2 control-label']) }}
+            <div class="col-sm-10 col-md-3">
+                {{ Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => '请输入描述', 'rows' => null, 'cols' => null]) }}
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
