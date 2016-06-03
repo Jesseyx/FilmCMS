@@ -32,7 +32,7 @@ class BannerStoreAndUpdate extends Request
             'source_id' => 'required_if:resource_type,1,2',
             'resource_type' => 'required|integer',
             'platform' => 'required',
-            'order' => 'sometimes|integer',
+            'order' => 'integer',
         ];
     }
 

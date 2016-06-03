@@ -47,7 +47,7 @@ class BannerController extends Controller
     public function store(Requests\BannerStoreAndUpdate $request)
     {
         //
-        $inputs = $request->all();dd($inputs);
+        $inputs = $request->all();
         $banner = new BannerBlock();
 
         $banner->title = $inputs['title'];
@@ -55,7 +55,7 @@ class BannerController extends Controller
         $banner->img_url = parse_url($inputs['img_url'], PHP_URL_PATH);
         $banner->link_path = $inputs['link_path'];
         $banner->description = $inputs['description'];
-        if ($inputs['is_ad']) {
+        if (isset($inputs['is_ad'])) {
             $banner->is_ad = intval($inputs['is_ad']);
         }
         $banner->status = $inputs['status'];

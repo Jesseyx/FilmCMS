@@ -24,8 +24,8 @@
         <div class="form-group">
             {{ Form::label('JBannerImgFile', '图片：', ['class' => 'col-sm-2 control-label']) }}
             <div class="col-sm-10 col-md-3">
-                <img alt="Banner Image" width="216" height="90">
-                {{ Form::hidden('img_url', null, ['id' => 'bannerImgInput']) }}
+                <img alt="Banner Image" width="216" height="90" src="{{ old('img_url') }}">
+                {{ Form::hidden('img_url', old('img_url'), ['id' => 'bannerImgInput']) }}
                 <span class="btn btn-success file-hidden-cover" type="button">
                     <i class="fa fa-upload"></i> 上传
                     {{ Form::file('file', ['id' => 'JBannerImgFile', 'class' => 'file-hidden']) }}
@@ -38,7 +38,7 @@
             <div class="col-sm-10 col-md-3">
                 <select id="resource_type" class="form-control" name="resource_type">
                     @foreach(config('admin.banner.resource_types') as $type)
-                        <option value={{ $type['value'] }}>
+                        <option value={{ $type['value'] }}{{ old('resource_type') == $type['value'] ? ' selected="selected"' : '' }}>
                             {{ $type['name'] }}
                         </option>
                     @endforeach
@@ -75,7 +75,7 @@
             <div class="col-sm-10 col-md-3">
                 <select id="platform" class="form-control" name="platform">
                     @foreach(config('admin.backend.platforms') as $platform)
-                        <option value={{ $platform['value'] }}>
+                        <option value={{ $platform['value'] }}{{ old('platform') == $platform['value'] ? ' selected="selected"' : '' }}>
                             {{ $platform['name'] }}
                         </option>
                     @endforeach
@@ -88,7 +88,7 @@
             <div class="col-sm-10 col-md-3">
                 <select id="status" class="form-control" name="status">
                     @foreach(config('admin.banner.status') as $status)
-                        <option value={{ $status['value'] }}>
+                        <option value={{ $status['value'] }}{{ old('status') == $status['value'] ? ' selected="selected"' : '' }}>
                             {{ $status['name'] }}
                         </option>
                     @endforeach
@@ -133,8 +133,10 @@
                 <!-- Your Page Content Here -->
 
     </section><!-- /.content -->
+
+    <div id="cropContainer"></div>
 @stop
 
 @section('footer')
-    <script src=""></script>
+    <script src={{ jsAsset('/js/banner_create.bundle.js') }}></script>
 @stop

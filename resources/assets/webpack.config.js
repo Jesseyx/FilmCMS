@@ -29,6 +29,9 @@ module.exports = {
 
         // permissionGroup
         permissionGroup_index: ['./permissionGroup/index'],
+
+        // banenr
+        banner_create: ['./banner/create'],
     },
     output: {
         path: path.join(__dirname, 'dist', 'js'),
