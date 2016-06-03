@@ -179,7 +179,7 @@ gulp.task('clean', function () {
 
 gulp.task('build-dev', ['build:dev:styles', 'build:dev:scripts'], function () {
     gulp.watch(SRC_DIR + '/sass/*.scss', ['build:style:custom']);
-    gulp.watch(SRC_DIR + '/js/**/*.js', ['build:scripts']);
+    gulp.watch(SRC_DIR + '/js/**/*.js', ['build:dev:scripts']);
 });
 
 // 测试环境需手动打包一下字体和图片
