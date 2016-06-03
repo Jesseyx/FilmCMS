@@ -24,7 +24,7 @@ class OperationTd extends Component {
         const { isVisible } = this.state;
         let element;
 
-        if (isVisible > 0) {;
+        if (isVisible > 0) {
             element = <AjaxAnchor
                 { ...props }
                 className="btn btn-default"
