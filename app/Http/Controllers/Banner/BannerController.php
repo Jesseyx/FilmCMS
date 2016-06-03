@@ -25,6 +25,7 @@ class BannerController extends Controller
     public function index()
     {
         //
+        return view('banner.index');
     }
 
     /**

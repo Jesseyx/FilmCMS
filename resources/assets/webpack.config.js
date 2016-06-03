@@ -30,7 +30,8 @@ module.exports = {
         // permissionGroup
         permissionGroup_index: ['./permissionGroup/index'],
 
-        // banenr
+        // banner
+        banner_index: ['./banner/index'],
         banner_create: ['./banner/create'],
     },
     output: {
