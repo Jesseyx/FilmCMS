@@ -27,6 +27,16 @@ class EditTd extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        const value = nextProps.value;
+
+        if (value !== this.state.value) {
+            this.setState({
+                value,
+            })
+        }
+    }
+
     handleDoubleClick() {
         this.setState({
             editing: true

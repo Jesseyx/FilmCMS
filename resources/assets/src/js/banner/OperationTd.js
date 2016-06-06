@@ -5,6 +5,7 @@ const propTypes = {
     value: PropTypes.number.isRequired,
     action: PropTypes.string.isRequired,
     data: PropTypes.object.isRequired,
+    reload: PropTypes.func.isRequired,
 }
 
 class OperationTd extends Component {
@@ -17,6 +18,7 @@ class OperationTd extends Component {
 
         this.handleSuccess = this.handleSuccess.bind(this);
         this.handleError = this.handleError.bind(this);
+        this.handleTopSuccess = this.handleTopSuccess.bind(this);
     }
 
     renderOperation() {
@@ -61,6 +63,35 @@ class OperationTd extends Component {
         return null;
     }
 
+    renderTop() {
+        const { value, data, ...props } = this.props;
+        return (
+            <AjaxAnchor
+                { ...props }
+                className="btn btn-default"
+                data={{ id: data.id, order: 9999 }}
+                onSuccess={ this.handleTopSuccess }
+                onError={ this.handleTopError }
+                style={{ marginTop: '10px' }}
+            >
+                <i className="fa fa-arrow-circle-up"></i>
+                <span> 置顶</span>
+            </AjaxAnchor>
+        )
+    }
+
+    handleTopSuccess(res, options) {
+        const query = {
+            orderBy: 'order,desc'
+        }
+        
+        this.props.reload(query);
+    }
+
+    handleTopError(res, options) {
+
+    }
+
     render() {
         const { data } = this.props;
 
@@ -76,6 +107,7 @@ class OperationTd extends Component {
                 </a>
 
                 { this.renderOperation() }
+                { this.renderTop() }
             </td>
         )
     }

@@ -73,6 +73,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         // banner
         Route::group(['namespace' => 'Banner'], function () {
+            Route::group(['prefix' => 'banner'], function () {
+                Route::post('ajax-edit', 'BannerController@ajaxEdit');
+            });
+
            Route::resource('banner', 'BannerController');
         });
 

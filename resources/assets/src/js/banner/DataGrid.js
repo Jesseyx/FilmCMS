@@ -20,6 +20,7 @@ class DataGrid extends Component {
 
         this.handleSortClick = this.handleSortClick.bind(this);
         this.handlePageClick = this.handlePageClick.bind(this);
+        this.handleReload = this.handleReload.bind(this);
     }
 
     componentDidMount() {
@@ -75,6 +76,16 @@ class DataGrid extends Component {
         this.loadData(query);
     }
 
+    handleReload(query) {
+        this.setState({
+            loading: true,
+        })
+        query = utils.initialQuery(query);
+        query = utils.concatQuery(this.props.query, query)
+
+        this.loadData(query);
+    }
+
     render() {
         const { loading, data } = this.state;
 
@@ -83,7 +94,7 @@ class DataGrid extends Component {
                 <div className="box">
                     <Loading show={ loading } />
 
-                    <TableBox data={ data } onSort={ this.handleSortClick } />
+                    <TableBox data={ data } onSort={ this.handleSortClick } reload={ this.handleReload } />
                 </div>
 
                 { this.renderPagination() }

@@ -6,11 +6,12 @@ import OperationTd from './OperationTd';
 
 const propTypes = {
     data: PropTypes.object.isRequired,
+    reload: PropTypes.func.isRequired,
 }
 
 class BannerRow extends Component {
     render() {
-        const { data } = this.props;
+        const { data, reload } = this.props;
         return (
             <tr>
                 <CommonTd value={ data.id } />
@@ -20,7 +21,7 @@ class BannerRow extends Component {
                 <CommonTd value={ data.up_time } />
                 <CommonTd value={ data.down_time } />
                 <EditTd name="order" action="http://localhost:8000/banner/ajax-edit" value={ data.order } data={{ id: data.id }} />
-                <OperationTd action="http://localhost:8000/banner/ajax-edit" value={ data.status } data={{ id: data.id }} />
+                <OperationTd action="http://localhost:8000/banner/ajax-edit" value={ data.status } data={{ id: data.id }} reload={ reload } />
             </tr>
         )
     }

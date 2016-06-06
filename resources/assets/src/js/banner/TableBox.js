@@ -7,6 +7,7 @@ import BannerRow from './BannerRow';
 const propTypes = {
     data: PropTypes.array.isRequired,
     onSort: PropTypes.func.isRequired,
+    reload: PropTypes.func.isRequired,
 }
 
 class TableBox extends Component {
@@ -25,12 +26,12 @@ class TableBox extends Component {
     }
 
     renderRows() {
-        const { data } = this.props;
+        const { data, reload } = this.props;
         
         if (!data.length) return null;
         const rows = data.map(item => {
             return (
-                <BannerRow data={ item } key={ item.id } />
+                <BannerRow data={ item } key={ item.id } reload={ reload } />
             )
         });
 

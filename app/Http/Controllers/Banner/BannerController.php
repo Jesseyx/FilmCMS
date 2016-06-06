@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class BannerController extends Controller
 {
@@ -116,5 +117,61 @@ class BannerController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function ajaxEdit(Request $request)
+    {
+        $inputs = $request->all();
+        $validator = Validator::make($inputs, [
+            'id' => 'required|integer',
+            'order' => 'integer',
+            'status' => 'integer'
+        ], [
+            'id.required' => 'id 不能为空',
+            'id.integer' => 'id 格式不正确',
+            'order.integer' => '排序格式不正确',
+            'status.integer' => '状态不正确',
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->errors();
+            return response()->json(['status' => 400, 'msg' => $messages]);
+        }
+
+        $info = [];
+        $banner = BannerBlock::findOrFail($inputs['id']);
+
+        if (isset($inputs['order'])) {
+            $info['order'] = intval($inputs['order']);
+        }
+
+        if (isset($inputs['status']) && in_array($inputs['status'], ['-1', '0', '1'])) {
+            $status = intval($inputs['status']);
+
+            if ($banner->status !== $status) {
+                $info['status'] = $status;
+                // 设置上下架时间
+                if ($status === 1) {
+                    $inputs['up_time'] = date('Y-m-d H:i:s');
+                } else if ($status === -1) {
+                    $info['down_time'] = date('Y-m-d H:i:s');
+                }
+            }
+        }
+
+        if (isset($inputs['title'])) {
+            $info['title'] = $inputs['title'];
+        }
+
+        if (isset($inputs['description'])) {
+            $info['description'] = $inputs['description'];
+        }
+
+        if (!empty($info)) {
+            $info['audit_userid'] = $this->user_id;
+            $banner->update($info);
+        }
+
+        return response()->json(['status' => 200, 'data' => $banner]);
     }
 }

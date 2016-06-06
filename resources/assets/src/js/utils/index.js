@@ -13,3 +13,20 @@ export function getSearch(url) {
 
     return '';
 }
+
+export function initialQuery(obj) {
+    let query, key;
+    for (key in obj) {
+        query = '&' + key + '=' + obj[key]
+    }
+
+    return query;
+}
+
+export function concatQuery(q1, q2) {
+    if (q1.indexOf('=') >= 1) {
+        return q1 + q2;
+    }
+
+    return q2.substring(1);
+}

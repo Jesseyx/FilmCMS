@@ -26,7 +26,7 @@ class BannerController extends Controller
             $query = BannerBlock::latest();
         }
 
-        if ($inputs['status']) {
+        if (isset($inputs['status']) && $inputs['status'] !== '') {
             $query = $query->where('status', $inputs['status']);
         }
 
