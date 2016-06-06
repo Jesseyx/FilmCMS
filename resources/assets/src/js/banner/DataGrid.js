@@ -55,7 +55,7 @@ class DataGrid extends Component {
         this.setState({
             loading: true,
         })
-        const query = this.props.query + '&orderBy=' + field + ',' + sign;
+        const query = utils.concatQuery(this.props.query, '&orderBy=' + field + ',' + sign);
         this.loadData(query);
     }
 
