@@ -82,6 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('role', 'RoleController@index');
             Route::get('permission', 'PermissionController@index');
             Route::get('permission-group', 'PermissionGroupController@index');
+            Route::get('banner', 'BannerController@index');
 
             Route::group(['prefix' => 'permission'], function () {
                 Route::get('all-group', 'PermissionController@getAllGroup');
