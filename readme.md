@@ -15,30 +15,30 @@
 
 ## Usage
 
-1. 签出项目
+ 1. 签出项目
 ```
  $ git clone https://github.com/Jesseyx/FilmCMS.git
 ```
 
-2. 进入资源文件夹，安装依赖
+ 2. 进入资源文件夹，安装依赖
 ```
  $ cd FilmCMS/resources/assets/
  $ npm install
 ```
 
-3. 构建前端代码
+ 3. 构建前端代码
 ```
  $ gulp build
  // 以后可以进入调试模式
  $ gulp
 ```
 
-4. 返回主目录，安装 laravel 依赖，请确保 composer 和 laravel 正常安装
+ 4. 返回主目录，安装 laravel 依赖，请确保 composer 和 laravel 正常安装
 ```
  $ composer install
 ```
 
-5. 启动服务后访问 http://localhost:8000/ 即可
+ 5. 启动服务后访问 http://localhost:8000/ 即可
 ```
  $ php artisan serve
 ```
