@@ -3,7 +3,13 @@ const config = {
         { value: 0, name: '待上架' },
         { value: 1, name: '已上架' },
         { value: -1, name: '已下架' },
-    ]
+    ],
+
+    resource_type: {
+        1: { name: '电影', value: 1 },
+        2: { name: '游戏', value: 2 },
+        3: { name: 'H5', value: 3 },
+    }
 }
 
 export default config;

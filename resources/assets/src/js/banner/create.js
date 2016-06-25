@@ -6,6 +6,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CropImage from '../components/crop';
 
+import config from '../config/Banner';
+
 $(function () {
     $('#JBannerImgFile').fileupload({
         url: '/image/upload?type=banner_carousel',
@@ -60,6 +62,38 @@ $(function () {
     })
 
     $('#btnGetSourceId').bind('click', function () {
-        alert('稍后再做');
+        const id = $('#source_id').val();
+        if (!id) {
+            return;
+        }
+
+        const type = +$('#resource_type').val();
+        let url = '';
+
+        if (type === 3) {
+            // h5
+            return;
+        } else if (type === 1) {
+            url = '/api/movie/library/' + id;
+        } else if (type === 2) {
+            url = '/api/game/library' + id;
+        } else {
+            return;
+        }
+
+        $.getJSON(url, {})
+            .done((res) => {
+                if (res.status !== 200) {
+                    return;
+                }
+
+                const data = res.data;
+                $('#title').val(data.title);
+                if (type === 1) {
+                    $('#sub_title').val(data.attract);
+                } else {
+                    $('#sub_title').val(data.sub_title);
+                }
+            })
     });
 })
