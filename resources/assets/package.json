@@ -1,13 +1,13 @@
 {
-  "name": "myadmin-assets",
+  "name": "filmcms-assets",
   "version": "1.0.0",
-  "description": "myadmin, assets",
-  "main": "index.js",
+  "description": "filmcms's assets",
+  "keywords": ["react", "webpack", "gulp"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp"
   },
   "author": "Jesseyx",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "admin-lte": "^2.3.3",
     "babel": "^6.5.2",

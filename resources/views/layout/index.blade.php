@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MY-Admin 后台管理系统</title>
+    <title>后台管理系统 | FILM-CMS | Jesseyx</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -42,9 +42,9 @@
         <!-- Logo -->
         <a href="" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>MY</b>Admin</span>
+            <span class="logo-mini"><b>Film</b>CMS</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>My</b>Admin</span>
+            <span class="logo-lg"><b>Film</b>CMS</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -334,9 +334,9 @@
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            Anything you want
+            Powered by Laravel, React, Admin-lte
         </div>
-        <strong>Copyright &copy; 2014-2016 <a href="http://www.kankan.com" target="_blank">响巢看看</a>.</strong> All rights
+        <strong>Copyright &copy; 2014-2016 <a href="https://github.com/Jesseyx" target="_blank">By Jesseyx</a>.</strong> All rights
         reserved.
     </footer>
 
