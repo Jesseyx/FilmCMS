@@ -16,28 +16,42 @@
 
 1. 签出项目
  ```
-  $ git clone https://github.com/Jesseyx/FilmCMS.git
+ $ git clone https://github.com/Jesseyx/FilmCMS.git
  ```
 
-2. 进入资源文件夹，安装依赖
+2. 安装项目依赖。请确保 composer 正常安装
  ```
- $ cd FilmCMS/resources/assets/
+ // 进入目录
+ $ cd FilmCMS/
+ // 安装依赖
+ $ composer install
+ ```
+ 
+3. 将 .env.example 复制一份为 .env，自行配置 mysql 数据库名（比如 film_cms），然后生成项目密钥
+ ```
+ $ php artisan key:generate
+ ```
+ 
+4. 导入表及测试数据
+ ```
+ $ php artisan migrate
+ $ php artisan db:seed
+ ```
+
+5. 进入资源文件夹，安装依赖
+ ```
+ $ cd resources/assets/
  $ npm install
  ```
 
-3. 构建前端代码
+6. 构建前端代码
  ```
  $ gulp build
  // 以后可以进入调试模式
  $ gulp
  ```
 
-4. 返回主目录，安装 laravel 依赖，请确保 composer 和 laravel 正常安装
- ```
- $ composer install
- ```
-
-5. 启动服务后访问 http://localhost:8000/ 即可
+7. 返回主目录，启动服务后访问 http://localhost:8000/ 即可
  ```
  $ php artisan serve
  ```
