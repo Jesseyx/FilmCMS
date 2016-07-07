@@ -17,9 +17,11 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         // 为视图组件附加登录的 user 对象
-        view()->composer('*', function ($view) {
-            $view->with('_user', Auth::user());
-        });
+        // composer 会在视图每次渲染时都做绑定
+//        view()->composer('*', function ($view) {
+//            $view->with('_user', Auth::user());
+//        });
+        view()->share('_user', Auth::user());
     }
 
     /**
